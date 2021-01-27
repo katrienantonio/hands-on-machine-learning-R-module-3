@@ -138,7 +138,7 @@ This presentation is based on
 
 * the work of prof. Taylor Arnold, in particular Chapter 8 in the book [A computational approach to statistical learning](https://www.routledge.com/A-Computational-Approach-to-Statistical-Learning/Arnold-Kane-Lewis/p/book/9780367570613) by Arnold, Kane &amp; Lewis (2019)
 
-* Boehmke (2020) on [Deep Learning with R: using Keras with Tensorflow backend](https://github.com/rstudio-conf-2020/dl-keras-tf).   
+* Boehmke (2020) on [Deep Learning with R: using Keras with TensorFlow backend](https://github.com/rstudio-conf-2020/dl-keras-tf).   
 
 ]
 
@@ -872,7 +872,7 @@ Many more activation functions: sigmoid, softmax, identity, etc. (see further).
 
 ---
 
-# Wrap-up on ANNs
+# From the simple neural network to ANNs
 
 .pull-left[
 Artificial Neural networks (.KULbginline[ANNs]): 
@@ -899,16 +899,16 @@ This is a .KULbginline[feedforward] neural network - no loops!
 
 ---
 
-# Wrap-up on ANNs - the neural nets' newspeak
+# The neural nets' terminology
 
 .pull-left[
-Using the neural nets newspeak or language: 
+Using the neural nets terminology or language: 
 
 * intercept called .KULbginline[the bias]
 
 * slopes called .KULbginline[weights] 
 
-* `\(L\)` layers in total, with input layer denoted as layer 0 
+* `\(L+1\)` layers in total, with input layer denoted as layer 0 and output layer as `\(L\)`
 
 * use `\(a\)` (from .KULbginline[activation]) to denote the output of a given neuron in a given layer. 
 
@@ -1100,12 +1100,12 @@ Here: the MNIST pictures (28x28) are flattened to a an input vector of length 78
 
 Nodes in the hidden layer(s) represent intermediary features that we do not explicitely define. 
 
-
 We let the model decide the optimal features.
+
+For example, recognizing a digit is more difficult than recognizing a horizontal or vertical line.
 
 &lt;img src="img/neural_network_digital.png" width="700" height="100" style="display: block; margin: auto;" /&gt;
 
-Recognizing a digit is more difficult than recognizing a horizontal or vertical line. &lt;br&gt;
 Hidden layers automatically split the problem into smaller problems that are easier to model.
 
 &lt;img src="img/neural_network_digital_example.png" width="700" height="100" style="display: block; margin: auto;" /&gt;
@@ -1298,14 +1298,14 @@ class: clear
 .right-column[
 
 &lt;br&gt;
-Ultimately, here is a summary of the network architecture for the MNIST data
+Ultimately, here is a summary of the network architecture discussed so far for the MNIST data
 
 
 ```r
 model &lt;- 
   keras_model_sequential() %&gt;%
   layer_dense(units = 512, 
-              activation = 'sigmoid', 
+              activation = 'relu', 
               input_shape = c(784)) %&gt;%
   layer_dense(units = 10, 
               activation = 'softmax')
@@ -1325,17 +1325,17 @@ class: clear
 
 ```
 ## Model: "sequential"
-## ______________________________________________________________________________________________________________________________________________
-## Layer (type)                                                   Output Shape                                             Param #               
-## ==============================================================================================================================================
-## dense_1 (Dense)                                                (None, 512)                                              401920                
-## ______________________________________________________________________________________________________________________________________________
-## dense (Dense)                                                  (None, 10)                                               5130                  
-## ==============================================================================================================================================
+## ________________________________________________________________________________
+## Layer (type)                        Output Shape                    Param #     
+## ================================================================================
+## dense_1 (Dense)                     (None, 512)                     401920      
+## ________________________________________________________________________________
+## dense (Dense)                       (None, 10)                      5130        
+## ================================================================================
 ## Total params: 407,050
 ## Trainable params: 407,050
 ## Non-trainable params: 0
-## ______________________________________________________________________________________________________________________________________________
+## ________________________________________________________________________________
 ```
 
 ]
@@ -1483,7 +1483,7 @@ The goal is to find weights and bias terms that .KULbginline[minimize the loss f
 In general terms, we want to find (with `\(w\)` for all unknown parameters)
 
 `$$\min_{w} \mathcal{L}(w),$$`
-With gradient descent: we'll move in the direction the loss locally decreases the fastest!
+With .KULbginline[gradient descent]: we'll move in the direction the loss locally decreases the fastest!
 
 Thus, 
 
@@ -1531,7 +1531,7 @@ Computing the gradient of the loss function wrt all trainable parameters:
 The strategy (Rumelhart et al., 1986, Nature)
 
 * [backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
-* derivatives in layer L are easy 
+* derivatives in outer layer L are easy 
 * derivatives in layer `\(l\)` as a function of derivatives in layer `\(l+1\)`
 * all about the .KULbginline[chain rule] for derivatives!
 
@@ -1600,7 +1600,7 @@ In the case of the MNIST dataset, we search for a model with a high .KULbginline
 
 `fit(.)` tunes the model parameters (the weights and bias terms). 
 
-There is no need to save the result as the input model gets updated automatically.
+We use `fit()` to start executing model training.
 
 .pull-left[
 
@@ -1624,7 +1624,9 @@ The first arguments are the input data (here: training images stored in `input`)
 ---
 # Fitting the model (cont.)
 
-`fit(.)` tunes the model parameters (the weights and bias terms). We use `fit()` to start executing model training.
+`fit(.)` tunes the model parameters (the weights and bias terms). 
+
+We use `fit()` to start executing model training.
 
 .pull-left[
 
@@ -1856,7 +1858,7 @@ With .KULbginline[dropout]:
 model %&gt;% 
   evaluate(test_input, test_output, verbose = 0)
 ##      loss  accuracy 
-## 0.2336414 0.9341000
+## 0.2336413 0.9341000
 ```
 
 `predict(.)` returns a vector of length 10 with the probability per output node.
@@ -2633,7 +2635,7 @@ nn_sev_log %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_log, 1) %&gt;% exp() %&gt;% as.numeric()
-## [1] 451.989
+## [1] 450.1818
 claims$avg %&gt;% summary()
 ##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
 ##       0.0     142.2     523.5    1605.8    1426.4 1989567.9
@@ -3421,8 +3423,10 @@ There is not a single doubt, this has to be a nine!
 
 ```r
 predict(model, random_conv)
-##              [,1]         [,2]         [,3]         [,4]         [,5]         [,6]         [,7]         [,8]      [,9]        [,10]
-## [1,] 7.361005e-15 2.655454e-30 2.406724e-12 2.888002e-07 5.990133e-18 3.955046e-15 6.562733e-10 2.638573e-21 0.9999998 2.079794e-08
+##              [,1]         [,2]         [,3]         [,4]         [,5]
+## [1,] 7.361005e-15 2.655454e-30 2.406724e-12 2.888002e-07 5.990133e-18
+##              [,6]         [,7]         [,8]      [,9]        [,10]
+## [1,] 3.955046e-15 6.562733e-10 2.638573e-21 0.9999998 2.079794e-08
 ```
 Actually almost all random images will be classified as a nine.
 
