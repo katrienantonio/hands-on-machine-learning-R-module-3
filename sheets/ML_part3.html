@@ -434,13 +434,13 @@ Most tensor operations require an axis parameter to specify the dimensions over 
 
 ```r
 k_mean(x, axis = 1)
-## tf.Tensor([2. 3.], shape=(2,), dtype=float32)
+## tf.Tensor([3. 4.], shape=(2,), dtype=float32)
 ```
 
 
 ```r
 k_mean(x, axis = 2)
-## tf.Tensor([1.5 3.5], shape=(2,), dtype=float32)
+## tf.Tensor([1.5 3.5 5.5], shape=(3,), dtype=float32)
 ```
 
 ]
@@ -519,10 +519,12 @@ tf$\`function`(k_log)(x)
 ```
 ## tf.Tensor(
 ## [[[0.        0.6931472]
-##   [1.0986123 1.3862944]]
+##   [1.0986123 1.3862944]
+##   [1.609438  1.7917595]]
 ## 
-##  [[1.609438  1.7917595]
-##   [1.9459102 2.0794415]]], shape=(2, 2, 2), dtype=float32)
+##  [[1.9459102 2.0794415]
+##   [2.1972246 2.3025851]
+##   [2.3978953 2.4849067]]], shape=(2, 3, 2), dtype=float32)
 ```
 
 
@@ -1504,7 +1506,67 @@ The goal is to find weights and bias terms that .KULbginline[minimize the loss f
 
 # Gradient descent and backpropagation
 
-The so-called backward pass is the process of using information from the loss function to update the weights and improve the performance.
+.pull-left[
+
+In general terms, we want to find (with `\(w\)` for all unknown parameters)
+
+`$$\min_{w} \mathcal{L}(w),$$`
+With gradient descent: we'll move in the direction the loss locally decreases the fastest!
+
+Thus, 
+
+`$$w_{\text{new}} = w_{\text{old}} - \eta \cdot \nabla_{w} \mathcal{L}(w_{\text{old}}),$$`
+
+with learning rate `\(\eta\)`. 
+
+With a loss function evaluated over `\(n\)` training data points (cfr. supra on *epochs* and *minibatches*)
+
+`$$\nabla_w \mathcal{L}(w) = \frac{1}{n} \sum_{i=1}^n \nabla_w \mathcal{L}_i$$`.
+
+]
+
+---
+
+# Gradient descent and backpropagation
+
+.pull-left[
+
+In general terms, we want to find (with `\(w\)` for all unknown parameters)
+
+`$$\min_{w} \mathcal{L}(w),$$`
+With gradient descent: we'll move in the direction the loss locally decreases the fastest!
+
+Thus, 
+
+`$$w_{\text{new}} = w_{\text{old}} - \eta \cdot \nabla_{w} \mathcal{L}(w_{\text{old}}),$$`
+
+with learning rate `\(\eta\)`. 
+
+With a loss function evaluated over `\(n\)` training data points (cfr. supra on *epochs* and *minibatches*)
+
+`$$\nabla_w \mathcal{L}(w) = \frac{1}{n} \sum_{i=1}^n \nabla_w \mathcal{L}_i$$`.
+
+]
+
+.pull-right[
+
+Computing the gradient of the loss function wrt all trainable parameters:
+
+* tons of parameters
+* need for efficient algorithm to calculate gradient
+* need for generic algorithm usable for arbitrary number of layers and neurons in each layer.
+
+The strategy (Rumelhart et al., 1986, Nature)
+
+* [backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
+* derivatives in layer L are easy 
+* derivatives in layer `\(l\)` as a function of derivatives in layer `\(l+1\)`
+* all about the .KULbginline[chain rule] for derivatives!
+
+
+
+]
+
 
 ---
 
@@ -1760,6 +1822,60 @@ model &lt;- model %&gt;%
 ]
 
 ---
+
+class: clear
+
+.pull-left[
+
+Several methods proposed to reduce overfitting:
+
+* try different weight initializations
+* early stopping
+* regularization
+* dropout.
+
+Available in {keras} as: 
+
+
+```r
+layer_dense(units = , activation = "relu", 
+      kernel_regularizer = regularizer_l2(l = 0.001))
+```
+
+
+```r
+layer_dropout(0.6)
+```
+
+
+```r
+# fit with callbacks
+model %&gt;% fit(___, ___, callbacks = list(
+  callback_early_stopping(___)
+))
+```
+
+Fore more details, please consult [https://keras.rstudio.com/articles/training_callbacks.html](https://keras.rstudio.com/articles/training_callbacks.html).
+
+]
+
+.pull-right[
+
+With .KULbginline[early stopping]:
+* calculate validation performance after each epoch
+* stop when this no longer improves.
+
+With .KULbginline[regularization] *(cfr. lasso and {glmnet})*: e.g.
+`$$\min_{w,b} \mathcal{L}(w,b)+\frac{\lambda}{2}\cdot \|w\|_2^2.$$`
+
+With .KULbginline[dropout]:
+* randomly set activations to zero, with fixed probability `\(p\)`
+* both in forward propagation as well as backpropagation
+* only in training, all nodes turned on during prediction.
+
+]
+
+---
 # Model evaluation
 
 `evaluate(.)` calculates losses and metrics on the test dataset. 
@@ -1872,7 +1988,7 @@ random &lt;- matrix(runif(28^2), nrow = 1)
 plot_image(random[1, ])
 ```
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-78-1.png" width="360" height="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-81-1.png" width="360" height="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -1917,26 +2033,32 @@ On the right we show a visualization of the calibrated weights for a pre-trained
 
 .pull-left[
 
-* Define neural networks .KULbginline[sequentially] in {keras}
+We discussed so far: 
+
+* design neural networks .KULbginline[sequentially] in {keras}
 `keras_model_sequential`. 
 
-* Layers consist of .KULbginline[nodes] and .KULbginline[connections].
+* layers consist of .KULbginline[nodes] and .KULbginline[connections].
 
-* The vanilla choice is a .KULbginline[fully connected layer]
-`layer_dense`.
+* vanilla choice is a .KULbginline[fully connected layer]
+`layer_dense`
+
+* .KULbginline[fit] the model via gradient descent (i.e. backpropagation).
 ]
 
 .pull-right[
-* In building a neural network we can .KULbginline[tune]:
+
+List of .KULbginline[tuning/architectural] choices:
 
   - the number of layers
   - the number of nodes per layer
   - the activation functions
-  - the layer type (more on this coming soon)
+  - the layer type *(more on this coming soon)*
   - the loss function
   - the optimization algorithm
   - the batch size
   - the number of epochs
+  - ...
 ]
 
 ---
@@ -2391,7 +2513,7 @@ gam_ageph &lt;- gam(nclaims ~ s(ageph),
 ]
 
 .pull-right[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-104-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-107-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -2472,7 +2594,7 @@ cann %&gt;% compile(loss = 'poisson', optimize = optimizer_rmsprop())
 .pull-left[
 
 <div id="htmlwidget-76c7b0e4dfca990a73d9" style="width:504px;height:504px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,6!\"] \n  \"2\" [label = \"batch_normalization_1\nBatchNormalization\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"3\" [label = \"dense_8\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"4\" [label = \"dense_7\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"5\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,6!\"] \n  \"6\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"7\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"->\"2\" \n  \"2\"->\"3\" \n  \"3\"->\"4\" \n  \"4\"->\"6\" \n  \"5\"->\"6\" \n  \"6\"->\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,6!\"] \n  \"2\" [label = \"batch_normalization\nBatchNormalization\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"3\" [label = \"dense_1\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"4\" [label = \"dense\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"5\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,6!\"] \n  \"6\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"7\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"->\"2\" \n  \"2\"->\"3\" \n  \"3\"->\"4\" \n  \"4\"->\"6\" \n  \"5\"->\"6\" \n  \"6\"->\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -2507,12 +2629,12 @@ cann %&gt;% fit(x = cann_input,
 # Adding a skip connection in a NN (cont.)
 
 .pull-left[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-115-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-118-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .pull-right[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-116-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-119-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -2539,7 +2661,7 @@ nn_sev_log %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_log, 1) %&gt;% exp() %&gt;% as.numeric()
-## [1] 453.4816
+## [1] 451.0045
 claims$avg %&gt;% summary()
 ##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
 ##       0.0     142.2     523.5    1605.8    1426.4 1989567.9
@@ -3107,7 +3229,7 @@ A useful feature for classifying the number four is the presence of straight, .h
 
 .hi-pink[Q]: How should the .hi-pink[kernel] look to detect this feature?
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-138-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-141-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -3319,7 +3441,7 @@ random_conv &lt;- k_expand_dims(random_conv, axis = 4)
 plot_image(random)
 ```
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-154-1.png" width="300" height="300" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-157-1.png" width="300" height="300" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
