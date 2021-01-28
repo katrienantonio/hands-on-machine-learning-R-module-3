@@ -8,7 +8,7 @@ Course materials for the *Hands-on Machine Learning in R* course
 Instituut.
 
 📆 Module 1 on December 10 and 17, 2020, Module 2 on Jan 14 and 21, 2021
-and Module 3 on Jan 28 and Feb 4, 2021 <br> 🕓 From 9.30 am to 12.30 pm
+and Module 3 on Jan 28 and Feb 4, 2021 <br> 🕦 From 9.30 am to 12.30 pm
 or from 1.30 pm to 4.30 pm <br> 📌 online, organized by Actuarieel
 Instituut
 
@@ -70,7 +70,7 @@ detailed schedule is subject to small changes.
 | Prework  |           | day before the workshop | download the course material from the GitHub repo        |                                                                                                                   |                                                                                                             |             |
 | Module 3 | Session 1 | 9.30 - 10.00            | XGBoost                                                  | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-2/sheets/ML_part2.html#XGBoost)      | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-2/scripts/13_xgboost.R)        |             |
 |          |           | 10.00 - 10.30           | Toolbox and tensors                                      | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#start)        | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/1_getting_started.R) |             |
-|          |           | 10.40 - 11.00           | MNIST data                                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#data-sets)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals)      |             |
+|          |           | 10.40 - 11.00           | MNIST data                                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#data-sets)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
 |          |           | 11.00 - 11.20           | De-mystifying neural networks                            | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#demystify)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
 |          |           | 11.30 - 12.30           | Neural networks in {keras}                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#fundamentals) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
 | Module 3 | Session 2 |                         |                                                          |                                                                                                                   |                                                                                                             |             |
