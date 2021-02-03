@@ -63,7 +63,7 @@ The schedule will gradually be completed over the next days. The detailed schedu
 | Module 3 |  Session 2  | 9.30 - 10.10 | Claim frequency with neural nets | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R) | |
 | | | 10.10 - 10.30 | Adding a skip connection | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R) | |
 | | | 10.40 - 11.20 | CNNs |  [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#cnn) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/4_convolutional.R) | |
-| | | 11.30 - 11.40 | Autoencoders | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#autoencoder) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/4_convolutional.R) | |
+| | | 11.30 - 11.40 | Autoencoders | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#autoencoder) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/5_auto_encoder.R) | |
 | | | 11.40 - 12.30 | Working on case study | | | | 
 
 

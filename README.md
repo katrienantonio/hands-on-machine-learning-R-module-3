@@ -8,8 +8,8 @@ Course materials for the *Hands-on Machine Learning in R* course
 Instituut.
 
 📆 Module 1 on December 10 and 17, 2020, Module 2 on Jan 14 and 21, 2021
-and Module 3 on Jan 28 and Feb 4, 2021 <br> 🕐 From 9.30 am to 12.30 pm
-or from 1.30 pm to 4.30 pm <br> 📍 online, organized by Actuarieel
+and Module 3 on Jan 28 and Feb 4, 2021 <br> 🕝 From 9.30 am to 12.30 pm
+or from 1.30 pm to 4.30 pm <br> 📌 online, organized by Actuarieel
 Instituut
 
 Course materials will be posted in the week before the workshop. You are
@@ -76,7 +76,7 @@ detailed schedule is subject to small changes.
 | Module 3 | Session 2 | 9.30 - 10.10            | Claim frequency with neural nets                         | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
 |          |           | 10.10 - 10.30           | Adding a skip connection                                 | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
 |          |           | 10.40 - 11.20           | CNNs                                                     | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#cnn)          | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/4_convolutional.R)   |             |
-|          |           | 11.30 - 11.40           | Autoencoders                                             | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#autoencoder)  | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/4_convolutional.R)   |             |
+|          |           | 11.30 - 11.40           | Autoencoders                                             | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#autoencoder)  | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/5_auto_encoder.R)    |             |
 |          |           | 11.40 - 12.30           | Working on case study                                    |                                                                                                                   |                                                                                                             |             |
 
 ##### Module 3: Neural networks
