@@ -188,14 +188,14 @@ Actuarial modelling with neural nets is covered in
   - Including exposure
   - Case study
 
-* [Auto encoders](#autoencoder)
-  - Data compression and feature extraction
-  - Evaluation
-
 * [Convolutional neural networks](#cnn)
   - Handling new data formats
   - Convolutional layers explained
   - Evaluation and intepretation
+  
+* [Auto encoders](#autoencoder)
+  - Data compression and feature extraction
+  - Evaluation
   
 ]
 
@@ -2010,9 +2010,9 @@ On the right we show a visualization of the calibrated weights for a pre-trained
 We discussed so far: 
 
 * design neural networks .KULbginline[sequentially] in {keras}
-`keras_model_sequential`. 
+`keras_model_sequential` 
 
-* layers consist of .KULbginline[nodes] and .KULbginline[connections].
+* layers consist of .KULbginline[nodes] and .KULbginline[connections]
 
 * vanilla choice is a .KULbginline[fully connected layer]
 `layer_dense`
@@ -2054,7 +2054,7 @@ name: regression
 
 ---
 # Preparing the MTPL data
-We predict .KULbginline[claim frequency] and .KULbginline[severity] in the MTPL data with a .KULbginline[neural network].
+We will now predict .KULbginline[claim frequency] and .KULbginline[severity] in the MTPL data with a .KULbginline[neural network].
 
 Load the .hi-pink[MTPL] data:
 
@@ -2098,7 +2098,7 @@ exp            | inverse link function | &amp;nbsp; activation function &amp;nbs
 ]
 
 ---
-# Your first claim frequency NN
+# Your first claim frequency neural network
 
 Let's start with a model with .KULbginline[only an intercept]:
 
@@ -2129,13 +2129,13 @@ nn_freq_intercept &lt;-
 
 * `input_shape = c(1)`: there is .hi-pink[one] input node, i.e., the intercept which will be constant one.
 
-* `use_bias = FALSE`: we don't need a .hi-pink[bias] term, since we explicitly include a constant intercept. 
+* `use_bias = FALSE`: we don't need a .hi-pink[bias] term, since we explicitly include an input node equal to one. 
 
-* `loss = 'poisson'`: we maximize the .hi-pink[Poisson] likelihood.
+* `loss = 'poisson'`: we maximize the .hi-pink[Poisson] likelihood, i.e., minimize the Poisson deviance.
 ]
 
 ---
-# Your first claim frequency NN
+# Your first claim frequency neural network
 
 Let's start with a model with .KULbginline[only an intercept]:
 
@@ -2172,13 +2172,13 @@ nn_freq_intercept$count_params()
 
 * `input_shape = c(1)`: there is .hi-pink[one] input node, i.e., the intercept which will be constant one.
 
-* `use_bias = FALSE`: we don't need a .hi-pink[bias] term, since we explicitly include a constant intercept. 
+* `use_bias = FALSE`: we don't need a .hi-pink[bias] term, since we explicitly include an input node equal to one.  
 
 * `loss = 'poisson'`: we maximize the .hi-pink[Poisson] likelihood.
 ]
 
 ---
-# Your first claim frequency NN (cont.)
+# Your first claim frequency neural network (cont.)
 
 .pull-left[
 Create .hi-pink[vectors] for the input and output:
@@ -2264,21 +2264,21 @@ class: clear
 We have shown that a .KULbginline[Poisson GLM] can be implemented as a neural network.
 &lt;br&gt;
 
-* .hi-pink[Q1]: adapt this code to replicate a .KULbginline[binomial GLM] with a .hi-pink[logit] link function. Add .KULbginline[accuracy] as a .hi-pink[metric] in your model.&lt;br&gt;
+* .hi-pink[Q.1]: adapt this code to replicate a .KULbginline[binomial GLM] with a .hi-pink[logit] link function. Add .KULbginline[accuracy] as a .hi-pink[metric] in your model.&lt;br&gt;
 Hint 1: the `sigmoid` activation function is the inverse of the logit link function. &lt;br&gt;
 Hint 2: the `binary_crossentropy` loss maximizes the loglikelihood of Bernoulli outcomes:
 $$ \sum_{i=1}^n (\color{#FFA500}{y_i} \cdot \log(p_i) + (1-\color{#FFA500}{y_i}) \cdot \log(1-p_i)).$$
 
-* .hi-pink[Q2]: .KULbginline[fit] your NN on the outcome variable (nclaims &gt; 0), i.e. modeling no claim versus having at least one claim. 
+* .hi-pink[Q.2]: .KULbginline[fit] your NN on the outcome or target variable (nclaims &gt; 0), i.e., modeling no claim versus having at least one claim. 
 
-* .hi-pink[Q3]: .KULbginline[compare] your fitted neural network with a .hi-pink[GLM].
+* .hi-pink[Q.3]: .KULbginline[compare] your fitted neural network with a .hi-pink[GLM].
 ]
 
 ---
 class:clear
 
 .pull-left[
-.hi-pink[Q1]: set-up for .KULbginline[binary classification]
+.hi-pink[Q.1]: neural network architecture for .KULbginline[binary classification]
 
 ```r
 nn_binary &lt;- 
@@ -2292,7 +2292,7 @@ nn_binary &lt;-
           metrics = c('accuracy'))
 ```
 
-.hi-pink[Q2]: .KULbginline[fit] your NN
+.hi-pink[Q.2]: .KULbginline[fit] your neural network
 
 ```r
 nn_binary %&gt;% fit(x = intercept,
@@ -2307,7 +2307,7 @@ nn_binary %&gt;% fit(x = intercept,
 ]
 
 .pull-right[
-.hi-pink[Q3]: compare with a .KULbginline[GLM]
+.hi-pink[Q.3]: compare with a .KULbginline[GLM]
 
 ```r
 glm_binary &lt;- glm((nclaims &gt; 0) ~ 1, 
@@ -2329,18 +2329,18 @@ unique(predict(nn_binary, x = intercept))
 
 ]
 ---
-# Taking exposure into account in a NN
+# Taking exposure into account in a neural network
 
 .pull-left[
 The .KULbginline[Poisson loss] function, including .hi-pink[exposure], is
 
-$$ \mathcal{L} = \sum_i \texttt{expo}_i \cdot \lambda_i - Y_i \cdot \log(\texttt{expo}_i \cdot \lambda_i),$$
-which can be rewritten as follows:
+$$ \mathcal{L} = \sum_i \texttt{expo}_i \cdot \lambda_i - y_i \cdot \log(\texttt{expo}_i \cdot \lambda_i),$$
+which is proportional to:
 
-$$ \mathcal{L} = \sum_i \texttt{expo}_i \cdot (\lambda_i - \frac{Y_i}{\texttt{expo}_i} \log(\lambda_i)).$$
+$$ \mathcal{L} = \sum_i \texttt{expo}_i \cdot (\lambda_i - \frac{y_i}{\texttt{expo}_i} \log(\lambda_i)).$$
 This is the loss function for a Poisson model with:
 
-* observations `\(\frac{Y_i}{\texttt{expo}_i}\)` and
+* observations `\(\frac{y_i}{\texttt{expo}_i}\)` and
 * weights `\(\texttt{expo}_i\)`.
 ]
 
@@ -2367,10 +2367,10 @@ glm_weights$coefficients
 ]
 
 ---
-# Taking exposure into account in a NN (cont.)
+# Taking exposure into account in a neural net (cont.)
 
 .pull-left[
-.KULbginline[Nothing] changes in our NN model .hi-pink[specification]:
+.KULbginline[Nothing] changes in our neural network model .hi-pink[specification]:
 
 ```r
 nn_freq_exposure &lt;- 
@@ -2383,13 +2383,13 @@ nn_freq_exposure &lt;-
           optimize = optimizer_rmsprop())
 ```
 
-It is however .hi-pink[good practice] to always .KULbginline[recompile]. &lt;br&gt; 
-Otherwise the NN will pick up where it left off last time, with the optimal weights after fitting.
+It is however .hi-pink[good practice] to always .KULbginline[recompile]. &lt;br&gt; &lt;br&gt;
+Otherwise the neural network will pick up where it left off last time, with the optimal weights after fitting.
 
 ]
 
 .pull-right[
-Create a vector with exposure values:
+Create a .hi-pink[vector] with exposure values:
 
 ```r
 exposure &lt;- mtpl_train$expo
@@ -2422,7 +2422,7 @@ Let's start by adding .hi-pink[one feature], namely `ageph`:
 ageph &lt;- mtpl_train$ageph
 ```
 
-Define the NN .hi-pink[architecture]:
+Define the neural network .hi-pink[architecture] with a hidden layer:
 
 ```r
 nn_freq_ageph &lt;- 
@@ -2441,7 +2441,7 @@ nn_freq_ageph &lt;-
 .pull-right[
 * .KULbginline[Pre-processing] (see Module 1): 
 
-`layer_batch_normalization` .hi-pink[centers] and .hi-pink[scales] the input features (here only one) .hi-pink[per batch].
+`layer_batch_normalization` .hi-pink[centers] and .hi-pink[scales] the input features (here only one) .hi-pink[per mini-batch].
 
 * .KULbginline[Hidden] layer:
 
@@ -2449,7 +2449,7 @@ nn_freq_ageph &lt;-
 
 * .KULbginline[Output] layer:
 
-`layer_dense` with one node and the `exponential` activation function.&lt;br&gt;
+`layer_dense` with one node and the `exponential` activation function.&lt;br&gt; &lt;br&gt;
 Notice how we set `use_bias = TRUE` for the .hi-pink[intercept.]
 
 ]
@@ -2458,7 +2458,7 @@ Notice how we set `use_bias = TRUE` for the .hi-pink[intercept.]
 # Adding an input feature and a hidden layer (cont.)
 
 .pull-left[
-Let's .hi-pink[fit] our brand new NN:
+Let's .hi-pink[fit] our brand new neural net:
 
 ```r
 nn_freq_ageph %&gt;% 
@@ -2473,7 +2473,7 @@ nn_freq_ageph %&gt;%
 
 
 
-We also fit a .hi-pink[GAM] to `ageph`:
+We also fit a .hi-pink[GAM] with a smooth effect for `ageph`:
 
 ```r
 library(mgcv)
@@ -2492,7 +2492,7 @@ gam_ageph &lt;- gam(nclaims ~ s(ageph),
 
 ]
 ---
-# Adding a skip connection in a NN
+# Adding a skip connection in a neural network
 
 So far, we stayed in a .hi-pink[purely sequential] architecture with `keras_model_sequential()`.
 
@@ -2500,7 +2500,7 @@ Now, we will allow some input nodes to be connected directly to the output node,
 
 .pull-left[
 &lt;img src="img/CANNarchitecture.png" width="75%" style="display: block; margin: auto;" /&gt;
-Figure taken from [Schelldorfer and Wuthrich (2019)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3320525)
+Figure taken from [Schelldorfer and Wuthrich (2019)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3320525).
 ]
 
 .pull-right[
@@ -2515,7 +2515,7 @@ So, what can we do with this?
 ]
 
 ---
-# Adding a skip connection in a NN (cont.)
+# Adding a skip connection in a neural network (cont.)
 
 Let's take a .KULbginline[claim frequency] example with the `exponential` activation function.
 
@@ -2528,26 +2528,26 @@ Let's take a .KULbginline[claim frequency] example with the `exponential` activa
 * The .hi-pink[combination] of both:
 `$$output = \exp(\sum_i w_i h_i + b + \color{#e64173}{\log(expo \cdot base)}) = \color{#e64173}{expo \cdot base} \cdot \exp(\sum_i w_i h_i + b).$$`
 
-A skip connection allows us to guide the NN in the right direction and model .hi.pink[adjustments] to the base predictions, for example obtained via a GLM or GAM. In the actuarial lingo this is called a .KULbginline[C]ombined .KULbginline[A]ctuarial .KULbginline[N]eural .KULbginline[N]etwork (.hi-pink[CANN]).
+A skip connection allows us to guide the neural net in the right direction and to model .hi.pink[adjustments] on top of the base predictions, for example obtained via a GLM or GAM. In the actuarial lingo this is called a .KULbginline[C]ombined .KULbginline[A]ctuarial .KULbginline[N]eural .KULbginline[N]etwork (.hi-pink[CANN]).
 
 ---
-# Adding a skip connection in a NN (cont.)
+# Adding a skip connection in a neural network (cont.)
 
-Create two .hi-pink[input layers] via `layer_input`, one for the skip connection and one for the NN:
+Create two .hi-pink[input layers] via `layer_input`, one for the skip connection and one for the neural network:
 
 ```r
 input_skip &lt;- layer_input(shape = c(1), name = 'skip')
 input_nn &lt;- layer_input(shape = c(1), name = 'nn')
 ```
 
-Specify the .hi-pink[architecture] to use for the NN part with a .hi-pink[linear] combination of the hidden nodes outputs:
+Specify the .hi-pink[architecture] to use for the neural net part with a .hi-pink[linear] combination of the hidden nodes as output:
 
 ```r
 network &lt;- input_nn %&gt;% layer_batch_normalization() %&gt;% layer_dense(units = 5, activation = 'tanh') %&gt;%
   layer_dense(units = 1, activation = `'linear'`)
 ```
 
-.hi-pink[Combine] the NN and skip connection via `layer_add` and pass through the `exponential` function without weights:
+.hi-pink[Combine] the neural network and skip connection via `layer_add` and pass through the `exponential` function with fixed weights:
 
 ```r
 output &lt;- list(network, input_skip) %&gt;% layer_add() %&gt;% 
@@ -2563,7 +2563,7 @@ cann %&gt;% compile(loss = 'poisson', optimize = optimizer_rmsprop())
 ```
 
 ---
-# Adding a skip connection in a NN (cont.)
+# Adding a skip connection in a neural network (cont.)
 
 .pull-left[
 
@@ -2600,7 +2600,7 @@ cann %&gt;% fit(x = cann_input,
 
 
 ---
-# Adding a skip connection in a NN (cont.)
+# Adding a skip connection in a neural network (cont.)
 
 .pull-left[
 &lt;img src="ML_part3_files/figure-html/unnamed-chunk-117-1.png" style="display: block; margin: auto;" /&gt;
@@ -2612,11 +2612,18 @@ cann %&gt;% fit(x = cann_input,
 ]
 
 ---
-# Claim severity modeling with NNs
+# Claim severity modeling with neural nets
 
-Within the GLM framework, .KULbginline[claim severity] is often modeled via a .hi-pink[lognormal] or .hi-pink[gamma] distribution.
+Within the GLM framework, .KULbginline[claim severity] is often modeled via a .KULbginline[lognormal] or .KULbginline[gamma] distribution.
 
 .pull-left[
+Filter the .hi-pink[claims] data:
+
+```r
+claims &lt;- mtpl_train %&gt;% dplyr::filter(nclaims &gt; 0)
+```
+
+
 Let's model the .hi-pink[log severity] with a .hi-pink[MSE] loss:
 
 ```r
@@ -2626,8 +2633,6 @@ nn_sev_log &lt;- keras_model_sequential() %&gt;%
 * compile(loss = 'mse',
           optimize = optimizer_rmsprop())
 
-claims &lt;- mtpl_train %&gt;% dplyr::filter(nclaims &gt; 0)
-
 nn_sev_log %&gt;% 
   fit(x = rep(1, nrow(claims)),
 *     y = log(claims$avg),
@@ -2635,30 +2640,90 @@ nn_sev_log %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_log, 1) %&gt;% exp() %&gt;% as.numeric()
-## [1] 450.1818
-claims$avg %&gt;% summary()
-##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-##       0.0     142.2     523.5    1605.8    1426.4 1989567.9
+## [1] 451.4381
 ```
 ]
 
 .pull-right[
+Calculate the .hi-pink[empirical] mean and median severity:
+
+```r
+claims$avg %&gt;% mean()
+## [1] 1605.764
+claims$avg %&gt;% median()
+## [1] 523.452
+```
+
+
 Seems like we are heavily .KULbginline[underestimating] the mean?
 
 The mean and median of the .hi-pink[lognormal] distribution:
-`$$mean = \exp(\mu + \sigma^2/2)$$`
-`$$median = \exp(\mu)$$`
-We are doing the latter, but how to .hi-pink[estimate] `\(\sigma\)` in a NN?
+`$$\text{mean} = \exp(\mu + \sigma^2/2)$$`
+`$$\text{median} = \exp(\mu)$$`
+We are doing the latter, but how to .hi-pink[estimate] `\(\sigma\)` in a neural network?
 
 &lt;br&gt;
 
-.KULbginline[Alternatives] to consider:
-
-* use MSE with .hi-pink[untransformed] severity amounts,
-
-* implement .hi-pink[your own loss] function (e.g., gamma).
 
 ]
+
+
+---
+# Claim severity modeling with neural nets (cont.)
+
+.pull-left[
+.KULbginline[Alternatives] to consider:
+
+* use MSE with .KULbginline[untransformed] severity amounts?
+
+* implement .KULbginline[your own loss] function (e.g., gamma).
+
+
+The .hi-pink[gamma deviance] for observation `\(i\)` is defined as:
+
+`$$\frac{y_i - f(x_i)}{f(x_i)} - \ln \left( \frac{y_i}{f(x_i)} \right).$$`
+Keras takes care of averaging over observations internally.
+
+Note that we use an `exponential` activation to stay in line with a gamma GLM with .hi-pink[log-link] function.
+
+
+```r
+claims %&gt;% dplyr::filter(avg &lt; 300000) %&gt;% 
+  dplyr::pull(avg) %&gt;% mean()
+## [1] 1385.939
+```
+
+]
+
+.pull-right[
+
+```r
+k_gamma &lt;- function(y_true, y_pred) { 
+((y_true - y_pred) / y_pred) - k_log(y_true / y_pred)
+}
+```
+
+
+```r
+nn_sev_gamma &lt;- keras_model_sequential() %&gt;%
+  layer_dense(units = 1,
+*             activation = 'exponential',
+              input_shape = c(1), use_bias = FALSE) %&gt;%
+* compile(loss = k_gamma,
+          optimize = optimizer_rmsprop())
+
+nn_sev_gamma %&gt;% 
+  fit(x = rep(1, nrow(claims)),
+*     y = claims$avg,
+      epochs = 100, batch_size = 128, 
+      validation_split = 0, verbose = 0)
+
+predict(nn_sev_gamma, 1) %&gt;% as.numeric()
+## [1] 1449.278
+```
+
+]
+
 ---
 
 name: yourturn
@@ -2676,23 +2741,23 @@ class: clear
 
 .right-column[
 
-Time to .KULbginline[apply] everything you learned on neural networks in a .hi-pink[claim frequency case study]! &lt;br&gt;
-The goal is to .hi-pink[fit] a couple of NNs on `mtpl_train` and .hi-pink[evaluate] those models on `mtpl_test`.
+Time to .KULbginline[apply] everything you learned on neural networks in a .KULbginline[claim frequency case study]! &lt;br&gt;
+The goal is to .hi-pink[fit] a couple of neural nets on `mtpl_train` and to .hi-pink[evaluate] those models on `mtpl_test`.
 
-**Step 1**: .KULbginline[Data pre-processing]:
+**Step 1**: master .KULbginline[data pre-processing]!
 
 * Write a .hi-pink[recipe] to prepare the input data.  &lt;br&gt; Feel free to check the {recipes} [reference page](https://tidymodels.github.io/recipes/reference/index.html) for inspiration.
 
 * Your recipe should contain at least the following .hi-pink[steps]:&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; Remove the features `id`, `amount`, `avg`, `town` and `pc` with `step_rm`.&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; Normalize all numeric features with `step_normalize`.&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; Dummy encode all nominal features with `step_dummy`.&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; remove the features `id`, `amount`, `avg`, `town` and `pc` with `step_rm`.&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; normalize all numeric features with `step_normalize`.&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; dummy encode all nominal features with `step_dummy`.&lt;br&gt;
 
 * .hi-pink[Bake] the training and test data following your recipe.
 
 * Make the train and test data .hi-pink[NN proof] as follows:&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; Create .hi-pink[vectors] for both `nclaims` and `expo`.&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; Create a .hi-pink[matrix] for the input features via `as.matrix()`.
+&amp;nbsp;&amp;nbsp;&amp;#9675; create .hi-pink[vectors] for both `nclaims` and `expo`.&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; create a .hi-pink[matrix] for the input features via `as.matrix()`.
 ]
 
 ---
@@ -2711,7 +2776,7 @@ class: clear
 
 .right-column[
 
-**Step 2**: .KULbginline[Model building]:
+**Step 2**: let's move to .KULbginline[model building].
 
 * .hi-pink[Compile] and .hi-pink[fit] a couple of neural networks on the pre-processed training data. &lt;br&gt; You are completely free to specify the architecture of your choice. 
 
@@ -2726,7 +2791,7 @@ class: clear
 
 * If you want to include exposure, either use .hi-pink[weights] or a .hi-pink[skip] connection.
 
-**Step 3.** .KULbginline[Model evaluation]:
+**Step 3**: now continue with the .KULbginline[model evaluation].
 
 * .hi-pink[Evaluate] your models on the test data via `evaluate`. Which architecture is the winner?
 
@@ -2856,18 +2921,396 @@ poisson_loss(predict(gam_case, mtpl_test,
 ]
 
 ---
+class: inverse, center, middle
+name: cnn
 
+# Convolutional neural networks (CNNs)
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+# The problems with flattening
+  
+.pull-left[
+With ANNs, our first step in the MNIST analysis was to .KULbginline[flatten] the image matrix into a vector:
+    
+
+```r
+input &lt;- tensorflow::array_reshape(
+  input, c(nrow(input), 28*28)) / 255
+```
+    
+    
+This approach
+  * is not .hi-pink[translation] invariant. A completely different set of nodes gets activated when the image is shifted.
+    
+  * ignores the .hi-pink[dependency] between nearby pixels.
+    
+  * requires a .hi-pink[large number] of parameters/weights as each node in the first hidden layer is connected to all nodes in the input layer.
+
+]
+
+.pull-right[
+&lt;img src="img/neural_network_flattening.png" width="300" height="350" style="display: block; margin: auto;" /&gt;
+  
+.right[
+Source: [Sumit Saha](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53)]
+
+.KULbginline[Convolutional layers] allow to handle multi-dimensional data, .hi-pink[without] flattening.
+]
+
+
+
+---
+# Convolutional layers
+
+Classical hidden layers (as we have seen so far) use .hi-pink[1 dimensional inputs] to construct .hi-pink[1 dimensional features].
+
+.KULbginline[2d convolutional] layers use .hi-pink[2 dimensional input] (for example images) to construct .hi-pink[2 dimensional feature maps].
+
+.pull-left[
+The weights in a 2d convolutional layer are structured in a small image, called the .hi-pink[kernel] or the .hi-pink[filter].
+
+&lt;img src="img/neural_network_convolution_op1.png" width="300" height="200" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+We slide the kernel over the input image, multiply the selected part of the image and the kernel elementwise and sum:
+
+&lt;img src="img/neural_network_convolution_op2.png" width="400" height="250" style="display: block; margin: auto;" /&gt;
+
+.right[Source: [Bradley Boehmke](https://github.com/rstudio-conf-2020/dl-keras-tf)]
+]
+
+---
+# Convolutional layers (cont.)
+
+Classical hidden layers (as we have seen so far) use .hi-pink[1 dimensional inputs] to construct .hi-pink[1 dimensional features].
+
+.KULbginline[2d convolutional] layers use .hi-pink[2 dimensional input] (for example images) to construct .hi-pink[2 dimensional feature maps].
+
+.pull-left[
+The weights in a 2d convolutional layer are structured in a small image, called the .hi-pink[kernel] or the .hi-pink[filter].
+
+&lt;img src="img/neural_network_convolution_op1.png" width="300" height="200" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+We slide the kernel over the input image, multiply the selected part of the image and the kernel elementwise and sum:
+
+&lt;img src="img/neural_network_convolution_op3.gif" width="400" height="250" style="display: block; margin: auto;" /&gt;
+.right[Source: [Bradley Boehmke](https://github.com/rstudio-conf-2020/dl-keras-tf)]
+]
+
+---
+
+# Convolutional layers (cont.)
+
+.KULbginline[2d convolutional] layers can .hi-pink[detect] the same, local feature .hi-pink[anywhere] in the image.
+
+.pull-left[
+A useful feature for classifying the number four is the presence of straight, .hi-pink[vertical lines].
+
+.hi-pink[Q]: How should the .hi-pink[kernel] look to detect this feature?
+  
+]
+
+.pull-right[
+original image:
+&lt;img src="img/neural_network_mnist4.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Convolutional layers (cont.)
+
+.KULbginline[2d convolutional] layers can .hi-pink[detect] the same, local feature .hi-pink[anywhere] in the image.
+
+.pull-left[
+A useful feature for classifying the number four is the presence of straight, .hi-pink[vertical lines].
+
+.hi-pink[Q]: How should the .hi-pink[kernel] look to detect this feature?
+  
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-137-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right[
+original image:
+&lt;img src="img/neural_network_mnist4.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+feature map:
+&lt;img src="img/neural_network_feature_map.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Convolutional layers in {keras}
+
+.pull-left[
+
+Add a .KULbginline[2d convolutional layer] with `layer_conv_2d()`:
+
+ 
+
+```r
+keras_model_sequential() %&gt;%
+* layer_conv_2d(filters = 8,
+*               kernel_size = c(3, 3),
+*               strides = c(1, 1),
+*               input_shape = c(28, 28, 1))
+```
+  
+ 
+]
+
+.pull-right[
+* `filters = 8`:
+  
+  We construct .hi-pink[8 feature maps] associated to different kernels/.hi-pink[filters].
+
+* `kernel_size = c(3, 3)`:
+  
+  The filter/.hi-pink[kernel] has a size of .hi-pink[3x3].
+
+* `strides = c(1, 1)`:
+  
+  We .hi-pink[move] the .hi-pink[kernel] in steps of .hi-pink[1] pixel in both the horizontal and vertical direction. This is a common choice.
+
+* `input_shape = c(28, 28, 1)`:
+  
+  If this is the first layer of the model, we also have to specify the dimensions of the input data. The input consists of .hi-pink[1 image] of size .hi-pink[28x28].
+]
+
+
+---
+# Pooling layers
+
+A convolution layer is typically followed by a .hi-pink[pooling step], which reduces the size of feature maps.
+
+.pull-left[
+.KULbginline[Pooling layers] divide the image in blocks of equal size and then .hi-pink[aggregate] the data per block.
+
+Two common operations are:
+  
+  * average pooling
+
+```r
+layer_average_pooling_2d(pool_size = c(2, 2),
+                         strides = c(2, 2))
+```
+
+* max pooling
+
+```r
+layer_max_pooling_2d(pool_size = c(2, 2),
+                     strides = c(2, 2))
+```
+
+
+]
+
+.pull-right[
+&lt;img src="img/neural_network_pooling.jpg" width="380" height="240" style="display: block; margin: auto;" /&gt;
+
+* `pool_size = c(2, 2)`: 
+  
+  Pool blocks of 2x2
+
+* `strides = c(2, 2)`:
+  
+  Move in steps of size 2 in both the horizontal and vertical direction.
+  
+]
+
+---
+# Flattening layers
+
+.pull-left[
+When all features are extracted, the data is .KULbginline[flattened]. 
+
+This data can be seen as .hi-pink[engineered features], automatically created by the CNN architecture.
+
+&lt;br&gt;
+
+In a next step, a .hi-pink[feed-forward ANN] is used to analyze these local features.
+
+
+]
+
+.pull-right[
+
+```r
+keras_model_sequential() %&gt;%
+  layer_conv_2d() %&gt;%
+  layer_max_pooling_2d() %&gt;%
+* layer_flatten()
+```
+
+
+```r
+keras_model_sequential() %&gt;%
+  layer_conv_2d() %&gt;%
+  layer_max_pooling_2d() %&gt;%
+  layer_flatten() %&gt;%
+* layer_dense() %&gt;%
+* layer_dense() %&gt;%
+  compile()
+```
+]
+
+---
+# A CNN with the MNIST data
+
+.pull-left[
+The image .hi-pink[input] data is not flattened this time:
+
+```r
+load("../data/mnist.RData")
+input_train &lt;- mnist$train$x / 255
+input_test &lt;- mnist$test$x / 255
+```
+
+We need to expand the axis with one extra dimension:
+
+```r
+dim(input_train)
+## [1] 60000    28    28
+input_train &lt;- k_expand_dims(input_train)
+dim(input_train)
+## [1] 60000    28    28     1
+input_test &lt;- k_expand_dims(input_test)
+```
+
+The .hi-pink[output] labels are one-hot encoded like before:
+
+```r
+output_train &lt;- keras::to_categorical(mnist$train$y, 10)
+output_test &lt;- keras::to_categorical(mnist$test$y, 10)
+```
+
+
+]
+
+.pull-right[
+Let's fit a CNN to the MNIST data:
+
+```r
+model &lt;- keras_model_sequential() %&gt;%
+    layer_conv_2d(filters = 8, 
+                  kernel_size = 3, 
+                  input_shape = c(28, 28, 1)) %&gt;%
+    layer_max_pooling_2d(pool_size = 2,
+                         strides = 2) %&gt;%
+    layer_flatten() %&gt;%
+    layer_dense(units = 10, 
+                activation = 'softmax') %&gt;%
+    compile(loss = 'categorical_crossentropy',
+            optimize = optimizer_rmsprop(),
+            metrics = c('accuracy')) 
+  
+model %&gt;% fit(x = input_train,
+              y = output_train, 
+              epochs = 10, 
+              batch_size = 128, 
+              validation_split = 0.2,
+              verbose = 0)
+```
+
+
+
+]
+
+---
+# Model evaluation
+
+.pull-left[
+Let's .KULbginline[evaluate] the model on our .hi-pink[test] data:
+
+```r
+model %&gt;% evaluate(input_test,
+                   output_test,
+                   verbose = 0)
+##     loss accuracy 
+## 0.105472 0.968700
+```
+Almost 97% of the test images are now correctly classified!
+
+Which images are misclassified?
+
+```r
+prediction &lt;- model %&gt;% predict(input_test)
+category &lt;- apply(prediction, 1, which.max) - 1
+actual_category &lt;- apply(output_test, 1, which.max) - 1
+head(which(actual_category != category))
+## [1]   9  93 248 260 291 306
+```
+]
+
+.pull-right[
+
+```r
+cbind(category, actual_category)[93,]
+##        category actual_category 
+##               4               9
+```
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-154-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Inspecting the filter/kernel
+
+The 8 3x3 .KULbginline[filters] can be extracted from the network via `$get_weights()`:
+
+```r
+filters &lt;- model$get_weights()[[1]]
+str(filters)
+##  num [1:3, 1:3, 1, 1:8] -0.572 0.248 0.363 -0.461 0.518 ...
+```
+
+.hi-pink[Q:] can you find an interpretation for each of these filters?
+
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-156-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+---
+name: yourturn
+class: clear
+
+.left-column[
+  
+&lt;!-- Add icon library --&gt;
+  &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+  
+  ## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
+    
+]
+
+
+.right-column[
+Time for you to .KULbginline[experiment] with .hi-pink[CNNs] in {keras}. Why not try to achieve 98% accuracy?
+
+&lt;br&gt;
+  
+We have now built .KULbginline[convolutional] neural networks using .hi-pink[layer_conv_2d()]. &lt;br&gt;
+In addition, {keras} offers .hi-pink[layer_conv_1d()] and .hi-pink[layer_conv_3d()]. &lt;br&gt;
+
+.hi-pink[Q]: For which data would you use .hi-pink[layer_conv_1d()]? &lt;br&gt;
+
+.hi-pink[Q]: For which data would you use .hi-pink[layer_conv_3d()]?
+
+]
+---
 class: inverse, center, middle
 name: autoencoder
 
 # Auto encoders
 
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
-
+  
 ---
 # Auto encoders
-
-.KULbginline[Auto encoders] compress the input data into a limited number of features. 
+  
+.KULbginline[Auto encoders] compress the input data into a .hi-pink[limited number of features]. 
 
 .pull-left[
 &lt;img src="img/neural_network_auto_encoder.png" width="300" height="400" style="display: block; margin: auto;" /&gt;
@@ -2877,7 +3320,7 @@ name: autoencoder
 
 * .KULbginline[Unsupervised] machine learning algorithm. 
 
-* .KULbginline[Decorrelation] of the input data, comparable with PCA. The low dimensional compressed data is often used as an input in traditional statistical models.
+* .KULbginline[Dimension reduction] of the input data, comparable with PCA. The low dimensional compressed data is often used as an input in predictive models.
 
 * Input and output are identical.
 
@@ -2893,15 +3336,15 @@ class: clear
 .left-column[
 
 &lt;!-- Add icon library --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
-
-## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
-
+  &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+  
+  ## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
+    
 ]
 
 
 .right-column[
-
+  
 Auto encoders can be implemented in Keras using the same tools that you have already learned during this course. 
 &lt;br&gt;
 The following steps guide you in .KULbginline[constructing] and .KULbginline[training] your personal auto encoder for the MNIST dataset.
@@ -2921,6 +3364,7 @@ The following steps guide you in .KULbginline[constructing] and .KULbginline[tra
   * sigmoid
   * softmax
 ]
+
 ---
 name: yourturn
 class: clear
@@ -2928,10 +3372,10 @@ class: clear
 .left-column[
 
 &lt;!-- Add icon library --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
-
-## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
-
+  &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+  
+  ## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
+    
 ]
 
 
@@ -2981,9 +3425,9 @@ model %&gt;%
 
 .pull-right[
 `encoder` contains the first part of the model for compressing the model.
-
+  
 `model` is the full auto encoder, including the encode and decode step.
-
+  
 By defining `model` as an extension of `encoder`, we can compress the data using `predict(encoder, ...)` after training the model.
 ]
 
@@ -3060,14 +3504,14 @@ model %&gt;%
 
 .pull-right[
 The `input` variable is also passed to the model as the `output` parameter.
-
+  
 The option `shuffle=TRUE` shuffles the training dataset after each epoch, such that the model is trained on different batches.
-
+  
 ]
 
 ---
 # The big test
-
+  
 Let's compare the input and output of our auto encoder.
 
 
@@ -3097,386 +3541,6 @@ gridExtra::grid.arrange(
 &lt;img src="img/neural_network_auto_encoder_noise.png" width="500" height="300" style="display: block; margin: auto;" /&gt;
 
 ---
-class: inverse, center, middle
-name: cnn
-
-# Convolutional neural networks (CNN)
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
-
----
-# Convolutional neural networks (CNN)
-
-.pull-left[
-So far, the first step in our analysis was to flatten the image matrix into a vector.
-
-
-```r
-input &lt;- tensorflow::array_reshape(
-  input, c(nrow(input), 28*28)) / 255
-```
-
-
-This approach
-* is not translation invariant. A completely different set of nodes gets activated when the image is shifted.
-
-* ignores the dependency between nearby pixels.
-
-* requires a large number of parameters/weights as each node in the first hidden layer is connected to all nodes in the input layer.
-
-.KULbginline[Convolutional layers] allow to handle dimensional data, .hi-pink[without] flattening.
-
-]
-
-.pull-right[
-&lt;img src="img/neural_network_flattening.png" width="300" height="350" style="display: block; margin: auto;" /&gt;
-
-.right[Source: [Sumit Saha](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53)]
-]
-
----
-# Convolutional layers
-
-Classical hidden layers use .hi-pink[1 dimensional inputs] to construct .hi-pink[1 dimensional features].
-
-2d convolutional layers use .hi-pink[2 dimensional input] (images) to construct .hi-pink[2 dimensional feature maps].
-
-.pull-left[
-The weights in a 2d convolutional layer are structured in a small image, called the kernel or the filter.
-
-&lt;img src="img/neural_network_convolution_op1.png" width="300" height="200" style="display: block; margin: auto;" /&gt;
-
-]
-
-.pull-right[
-We slide the kernel over the input image and compute matrix multiplications between the selected part of the image and the kernel.
-
-&lt;img src="img/neural_network_convolution_op2.png" width="400" height="250" style="display: block; margin: auto;" /&gt;
-
-.right[Source: [Bradley Boehmke](https://github.com/rstudio-conf-2020/dl-keras-tf)]
-]
-
----
-# Convolutional layers (cont.)
-
-Classical hidden layers use .hi-pink[1 dimensional inputs] to construct .hi-pink[1 dimensional features].
-
-2d convolutional layers use .hi-pink[2 dimensional input] (images) to construct .hi-pink[2 dimensional feature maps].
-
-.pull-left[
-The weights in a 2d convolutional layer are structured in a small image, called the kernel or the filter.
-
-&lt;img src="img/neural_network_convolution_op1.png" width="300" height="200" style="display: block; margin: auto;" /&gt;
-
-]
-
-.pull-right[
-We slide the kernel over the input image and compute matrix multiplications between the selected part of the image and the kernel.
-
-&lt;img src="img/neural_network_convolution_op3.gif" width="400" height="250" style="display: block; margin: auto;" /&gt;
-.right[Source: [Bradley Boehmke](https://github.com/rstudio-conf-2020/dl-keras-tf)]
-]
-
----
-# Convolutional layers (cont.)
-
-2d convolutional layers can .hi-pink[detect] the same, .hi-pink[local feature anywhere] in the image.
-
-.pull-left[
-A useful feature for classifying the number four is the presence of straight, vertical lines.
-
-.hi-pink[Q]: How should the kernel look to detect this feature?
-
-]
-
-.pull-right[
-&lt;img src="img/neural_network_mnist4.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
-]
-
----
-# Convolutional layers (cont.)
-
-2d convolutional layers can .hi-pink[detect] the same, .hi-pink[local featur anywhere] in the image.
-
-.pull-left[
-A useful feature for classifying the number four is the presence of straight, .hi-pink[vertical lines].
-
-.hi-pink[Q]: How should the .hi-pink[kernel] look to detect this feature?
-
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-140-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
-
-
-]
-
-.pull-right[
-original image:
-&lt;img src="img/neural_network_mnist4.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
-feature map:
-&lt;img src="img/neural_network_feature_map.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
-]
----
-# Convolutional layers in {keras}
-
-.pull-left[
-
-```r
-keras_model_sequential() %&gt;%
-* layer_conv_2d(filters = 8,
-*               kernel_size = c(3, 3),
-*               strides = c(1, 1),
-*               input_shape = c(28, 28, 1))
-```
-
-&lt;br&gt;
-
-Add a .KULbginline[2d convolutional layer] with `layer_conv_2d()`:
-]
-
-.pull-right[
-* `filters = 8`:
-
-We construct .hi-pink[8 feature maps] associated to different kernels/.hi-pink[filters].
-
-* `kernel_size = c(3, 3)`:
-
-The filter/.hi-pink[kernel] has a size of .hi-pink[3x3].
-
-* `strides = c(1, 1)`:
-
-We .hi-pink[move] the .hi-pink[kernel] in steps of .hi-pink[1] pixel in both the horizontal and vertical direction. This is a common choice.
-
-* `input_shape = c(28, 28, 1)`:
-
-If this is the first layer of the model, we also have to specify the dimensions of the input data. The input consists of .hi-pink[1 image] of size .hi-pink[28x28].
-]
-
----
-# Pooling
-
-A convolution layer is typically followed by a .hi-pink[pooling step], which reduces the size of feature maps.
-
-.pull-left[
-.hi-pink[Pooling layers] divide the image in blocks of equal size and then aggregate the data per block.
-
-Two common operations are:
-
-* Average pooling
-
-```r
-layer_average_pooling_2d(pool_size = c(2, 2),
-                         strides = c(2, 2))
-```
-
-* Max pooling
-
-```r
-layer_max_pooling_2d(pool_size = c(2, 2),
-                     strides = c(2, 2))
-```
-
-
-]
-
-.pull-right[
-&lt;img src="img/neural_network_pooling.jpg" width="380" height="240" style="display: block; margin: auto;" /&gt;
-
-* `pool_size = c(2, 2)`: 
-
-Pool blocks of 2x2
-
-* `strides = c(2, 2)`:
-
-Move in steps of size 2 in both the horizontal and vertical direction.
-
-]
-
----
-# Flatten
-
-.pull-left[
-
-```r
-keras_model_sequential() %&gt;%
-  layer_conv_2d() %&gt;%
-  layer_max_pooling_2d() %&gt;%
-* layer_flatten() %&gt;%
-  layer_dense()
-```
-]
-
-.pull-right[
-Finally, when all local features are extracted the data is .KULbginline[flattened]. 
-
-A classical neural network (as built in the first part of these course) analyzes these local features.
-]
-
----
-name: yourturn
-class: clear
-
-.left-column[
-
-&lt;!-- Add icon library --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
-
-## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
-
-]
-
-
-.right-column[
-
-.KULbginline[Fit] and .KULbginline[evaluate] a .KULbginline[convolutional neural network] on the MNIST dataset.
-
-Before you start, you should restructure the input and test dataset in the required format.
-
-
-```r
-# We start from the original data
-input_conv &lt;- mnist$train$x / 255
-
-# We add a fourth dimension, such that one data point has size (28x28x1)
-input_conv &lt;- k_expand_dims(input_conv, axis = 4)
-```
-
-Once you are satisfied with the performance of your model, you can plot some images that were misclassified by your model.
-]
----
-class:clear
-
-.pull-left[
-
-```r
-model &lt;- keras_model_sequential() %&gt;%
-  layer_conv_2d(filters = 8, 
-                kernel_size = 3, 
-                input_shape = c(28, 28, 1)) %&gt;%
-  layer_max_pooling_2d(pool_size = 2) %&gt;%
-  layer_flatten() %&gt;%
-  layer_dense(units = 10, 
-              activation = 'softmax') %&gt;%
-  compile(loss = 'categorical_crossentropy',
-          optimize = optimizer_rmsprop(),
-          metrics = c('accuracy')) 
-  
-model %&gt;% fit(input_conv, output, 
-      epochs = 10, 
-      batch_size = 128, 
-      validation_split = 0.2)
-
-model %&gt;% 
-  evaluate(test_input_conv, 
-           test_output,verbose = 0)
-```
-]
-
-.pull-right[
-
-```
-##      loss  accuracy 
-## 0.1224037 0.9659000
-```
-
-Model accuracy has increased significantly and improves further with more epochs. 
-
-]
----
-# Misclassifications
-
-
-```r
-prediction &lt;- model %&gt;% predict(test_input_conv)
-category &lt;- apply(prediction, 1, which.max)-1
-actual_category &lt;- apply(test_output, 1, which.max)-1
-head(which(actual_category != category))
-```
-
-```
-## [1]   9  19  93 248 260 319
-```
-
-```r
-plot_image(test_input[93, ])
-```
-
-
-&lt;img src="img/neural_network_conv_wrong.png" width="700" height="300" style="display: block; margin: auto;" /&gt;
-
----
-# What happens to random data?
-.pull-left[
-
-```r
-random &lt;- runif(28*28)
-random_conv &lt;- matrix(random, nrow = 28, ncol = 28)
-random_conv &lt;- k_expand_dims(random_conv, axis = 1)
-random_conv &lt;- k_expand_dims(random_conv, axis = 4)
-
-plot_image(random)
-```
-
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-156-1.png" width="300" height="300" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right[
-There is not a single doubt, this has to be a nine!
-
-```r
-predict(model, random_conv)
-##              [,1]         [,2]         [,3]         [,4]         [,5]
-## [1,] 7.361005e-15 2.655454e-30 2.406724e-12 2.888002e-07 5.990133e-18
-##              [,6]         [,7]         [,8]      [,9]        [,10]
-## [1,] 3.955046e-15 6.562733e-10 2.638573e-21 0.9999998 2.079794e-08
-```
-Actually almost all random images will be classified as a nine.
-
-]
----
-# Inspecting the filter/kernel
-
-The third filter/kernel is the one we infered for detecting vertical lines. 
-Can you find an interpretation for the other kernels?
-
-
-```r
-weights &lt;- purrr::map(1:8, function(x) {plot_image(as.numeric(model$get_weights()[[1]][,,,x]), FALSE)})
-weights[['nrow']] &lt;- 2
-do.call(gridExtra::grid.arrange, weights)
-```
-
-&lt;img src="img/neural_network_conv_kernel.png" width="600" height="300" style="display: block; margin: auto;" /&gt;
----
-name: yourturn
-class: clear
-
-.left-column[
-
-&lt;!-- Add icon library --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
-
-## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
-
-]
-
-
-.right-column[
-
-We have now built .KULbginline[convolutional neural] networks using .hi-pink[layer_conv_2d()]. &lt;br&gt;In addition {keras} defines  .hi-pink[layer_conv_1d()] and .hi-pink[layer_conv_3d()].
-&lt;br&gt;
-&lt;br&gt;
-.hi-pink[Q]: For which data would you use .hi-pink[layer_conv_1d()]?
-&lt;br&gt;
-
-.hi-pink[Q]: Which function would you use to build a convolutional network for:
-
-* Colored images
-&lt;br&gt;
-
-* Movie data
-]
-
----
-
 name: wrap-up
 
 # Thanks!  &lt;img src="img/xaringan.png" class="title-hex"&gt;
