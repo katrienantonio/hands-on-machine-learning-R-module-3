@@ -1,16 +1,15 @@
 
-## Workshop Hands-on Machine Learning in R, 2020 - 2021
+## Workshop Hands-on Machine Learning in R, September 2021 edition
 
-by Katrien Antonio and Roel Henckaerts
+by Katrien Antonio, Jonas Crevecoeur and Roel Henckaerts
 
 Course materials for the *Hands-on Machine Learning in R* course
-(December 2020 - February 2021) in collaboration with Actuarieel
-Instituut.
+(September 2021).
 
-📆 Module 1 on December 10 and 17, 2020, Module 2 on Jan 14 and 21, 2021
-and Module 3 on Jan 28 and Feb 4, 2021 <br> 🕝 From 9.30 am to 12.30 pm
-or from 1.30 pm to 4.30 pm <br> 📌 online, organized by Actuarieel
-Instituut
+📆 Module 1 on September 7 & 8, 2021, Module 2 on September 9 & 10, 2021
+and Module 3 on September 13 & 14, 2021 <br> 🕗 From 9.00 am to 12.00 pm
+or from 1.30 pm to 4.30 pm <br> 📍 online, organized by Capgemini Academy
+and Nationale Nederlanden
 
 Course materials will be posted in the week before the workshop. You are
 now on the landing page for **Module 3: neural networks**.
@@ -68,16 +67,15 @@ detailed schedule is subject to small changes.
 | :------: | :-------: | ----------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------- |
 | Prework  |           | your own pace           | check the Prework and Software Requirements instructions |                                                                                                                   |                                                                                                             |             |
 | Prework  |           | day before the workshop | download the course material from the GitHub repo        |                                                                                                                   |                                                                                                             |             |
-| Module 3 | Session 1 | 9.30 - 10.00            | XGBoost                                                  | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-2/sheets/ML_part2.html#XGBoost)      | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-2/scripts/13_xgboost.R)        |             |
-|          |           | 10.00 - 10.30           | Toolbox and tensors                                      | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#start)        | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/1_getting_started.R) |             |
-|          |           | 10.40 - 11.00           | MNIST data                                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#data-sets)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
-|          |           | 11.00 - 11.20           | De-mystifying neural networks                            | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#demystify)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
-|          |           | 11.30 - 12.30           | Neural networks in {keras}                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#fundamentals) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
-| Module 3 | Session 2 | 9.30 - 10.10            | Claim frequency with neural nets                         | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
-|          |           | 10.10 - 10.30           | Adding a skip connection                                 | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
-|          |           | 10.40 - 11.20           | CNNs                                                     | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#cnn)          | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/4_convolutional.R)   |             |
-|          |           | 11.30 - 11.40           | Autoencoders                                             | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#autoencoder)  | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/5_auto_encoder.R)    |             |
-|          |           | 11.40 - 12.30           | Working on case study                                    |                                                                                                                   |                                                                                                             |             |
+| Module 3 | Session 1 | 13.30 - 14.10           | Toolbox and tensors                                      | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#start)        | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/1_getting_started.R) |             |
+|          |           | 14.10 - 14.30           | MNIST data                                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#data-sets)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
+|          |           | 14.40 - 15.10           | De-mystifying neural networks                            | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#demystify)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
+|          |           | 15.10 - 16.30           | Neural networks in {keras}                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#fundamentals) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
+| Module 3 | Session 2 | 9.00 - 9.40             | Claim frequency with neural nets                         | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
+|          |           | 9.40 - 10.00            | Adding a skip connection                                 | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
+|          |           | 10.00 - 10.40           | CNNs                                                     | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#cnn)          | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/4_convolutional.R)   |             |
+|          |           | 10.50 - 11.00           | Autoencoders                                             | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#autoencoder)  | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/5_auto_encoder.R)    |             |
+|          |           | 11.10 - 12.00           | Working on case study                                    |                                                                                                                   |                                                                                                             |             |
 
 ##### Module 3: Neural networks
 
@@ -96,57 +94,47 @@ In two sessions we cover:
 Download lecture sheets in
 [pdf](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.pdf).
 
-## After the workshop: want to more know?
-
-An excellent collection of tutorials, books, workshops, events is
-available via
-
-<http://www.actuarialdatascience.org>
-
 ## Software Requirements
 
 You have **two options** to join the coding exercises covered during the
 workshop. Either you join the RStudio cloud workspace dedicated to the
 workshop, and then you’ll run R in the cloud, from your browser. Or you
-use your local installation of R, Python and RStudio. The first option
-is very easy and accessible. Make sure one of these options works
-smoothly before coming to the workshop. A technical test session will be
-organized to get you started in case of problems or doubts.
+use your local installation of R and RStudio.
+
+We kindly ask participants to **join the RStudio Cloud as default**\!
 
 ### RStudio Cloud
 
-If you prefer not to work with a local installation of R (and the
-necessary packages), you can join our workspace on RStudio Cloud. This
-should be a **very accessible set-up** for working with R in the cloud
-for the less experienced user\!
+You will join our workspace on R Studio Cloud. This enables a **very
+accessible set-up** for working with R in the cloud for the less
+experienced user\!
 
 <https://rstudio.cloud/spaces/109060/join?access_code=s3jVNlJn6J8SlZpSXmwvBsCMUC3XicxoFv5kCbCO>
 
 Here are the steps you should take (before the workshop):
 
   - visit the above link
-  - log in by creating an account for RStudio or by using your Google or
-    GitHub login credentials
+  - log in by creating an account for RStudio Cloud or by using your
+    Google or GitHub login credentials
   - join the space
   - at the top of your screen you see ‘Projects’, click ‘Projects’
   - with the ‘copy’ button (on the right) you can make your own version
-    of the ‘Module 3 - Neural networks’ project; in this copy you can
-    work on the exercises, add comments etc.
-  - you should now be able to visit the ‘Module 2’ project and see the
-    ‘scripts’ and ‘data’ folders on the right. Open and run the
+    of the ‘day 1 on loss modelling’ project; in this copy you can work
+    on the exercises, add comments etc.
+  - you should now be able to visit the project and see the ‘scripts’
+    and ‘data’ folders on the right. Open and run the
     ‘installation-instructions.R’ script from the scripts folder, to
     see if everything works fine.
 
 We will have everything set up for you in the correct way. You only have
-to login and open your copy of the project\!
+to login\!
 
 ### Local installation
 
-Please bring a laptop with a recent version of R and RStudio installed.
-You can visit the folder ‘prework’ on the GitHub repo to find
-installation instructions for both. Make sure you can connect your
-laptop to the internet (or download the course material one day before
-the start of the workshop). You will need:
+Alternatively, you can bring a laptop with a recent version of R and
+RStudio installed. Make sure you can connect your laptop to the internet
+(or download the course material one day before the start of the
+workshop). You will need:
 
   - R (at least 3.5.2 <https://cloud.r-project.org/bin/windows/base/>)
   - RStudio
@@ -210,6 +198,19 @@ University of Amsterdam. She teaches courses on data science for
 insurance, life and non-life insurance mathematics and loss models.
 Research-wise Katrien puts focus on pricing, reserving and fraud
 analytics, as well as mortality dynamics.
+
+</p>
+
+<p align="justify">
+
+*Jonas Crevecoeur* is a post-doctoral researcher in biostatistics at KU
+Leuven. He recently obtained his PhD within the insurance research group
+at KU Leuven and holds the degrees of MSc in Mathematics, MSc in
+Insurance Studies and MSc in Financial and Actuarial Engineering (KU
+Leuven). Before starting the PhD program he worked as an intern with QBE
+Re (Belgium office) where he studied multiline products and copulas.
+Jonas was a PhD fellow of the Research Foundation - Flanders (FWO, PhD
+fellowship fundamental research).
 
 </p>
 
