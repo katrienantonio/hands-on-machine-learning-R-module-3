@@ -81,7 +81,7 @@ name: checklist
   
   ```r
   version$version.string
-  ## [1] "R version 4.0.3 (2020-10-10)"
+  ## [1] "R version 3.6.2 (2019-12-12)"
   ```
 
 ☑ Do you have a fairly recent version of RStudio? 
@@ -155,6 +155,10 @@ Actuarial modelling with neural nets is covered in
 
 * Wüthrich &amp; Merz (2019) [Editorial: Yes, we CANN!](https://www.cambridge.org/core/journals/astin-bulletin-journal-of-the-iaa/article/editorial-yes-we-cann/66E8BEC373B5CCEF3BF3303D442D6B75), in ASTIN Bulletin 49/1.
 
+* Denuit, Hainaut &amp; Trufin (2019) [Effective Statistical Learning Methods for Actuaries: Neural Networks and Extensions](https://www.springer.com/gp/book/9783030258269), Springer Actuarial Lecture Notes
+
+* A series of (working) papers covering the use of neural nets in insurance pricing (classic, and with telematics collected data), mortality forecasting, reserving, ... 
+
 ]
 
 ---
@@ -227,6 +231,28 @@ name: start
 # Getting started
 
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# What's the excitement about?
+
+### .font140[&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 352 512"&gt;&lt;path d="M176 80c-52.94 0-96 43.06-96 96 0 8.84 7.16 16 16 16s16-7.16 16-16c0-35.3 28.72-64 64-64 8.84 0 16-7.16 16-16s-7.16-16-16-16zM96.06 459.17c0 3.15.93 6.22 2.68 8.84l24.51 36.84c2.97 4.46 7.97 7.14 13.32 7.14h78.85c5.36 0 10.36-2.68 13.32-7.14l24.51-36.84c1.74-2.62 2.67-5.7 2.68-8.84l.05-43.18H96.02l.04 43.18zM176 0C73.72 0 0 82.97 0 176c0 44.37 16.45 84.85 43.56 115.78 16.64 18.99 42.74 58.8 52.42 92.16v.06h48v-.12c-.01-4.77-.72-9.51-2.15-14.07-5.59-17.81-22.82-64.77-62.17-109.67-20.54-23.43-31.52-53.15-31.61-84.14-.2-73.64 59.67-128 127.95-128 70.58 0 128 57.42 128 128 0 30.97-11.24 60.85-31.65 84.14-39.11 44.61-56.42 91.47-62.1 109.46a47.507 47.507 0 0 0-2.22 14.3v.1h48v-.05c9.68-33.37 35.78-73.18 52.42-92.16C335.55 260.85 352 220.37 352 176 352 78.8 273.2 0 176 0z"/&gt;&lt;/svg&gt;] Neural networks are an exciting topic to explore, because:
+
+--
+
+* They are a .KULbginline[biologically-inspired programming paradigm] that enables a computer to learn from data.
+
+--
+
+* .KULbginline[Deep learning] is a powerful set of techniques for learning in neural networks.
+
+--
+
+* Neural networks and deep learning provide .KULbginline[best-in-class solutions] to many problems in image recognition, speech recognition and natural language processing.
+
+--
+
+* The .KULbginline[universal approximation theorem] (Hornik et al., 1989; Cybenko, 1989) states that neural networks with a single hidden layer can be used to approximate any continuous function to any desired precision.
 
 ---
 
@@ -318,7 +344,9 @@ What is a .hi-pink[tensor]?
 &lt;img src="ML_part3_files/figure-html/unnamed-chunk-6-1.png" width="300" height="100" style="display: block; margin: auto;" /&gt;
 
 * ...
+
 --
+
 Tensors generalize vectors and matrices to an arbitrary number of dimensions. 
 
 Many matrix operations, such as the matrix product, can be generalized to tensors.
@@ -384,7 +412,7 @@ Then, a collection of images can be stored in a 4D tensor `(samples, height, wid
 
 .pull-left[
 
-Let's picture an video data set where
+Let's picture a video data set where
 
 * each video sample is one minute long and has a number of frames per second (e.g. 4 frames per second)
 * each frame has a specific height (e.g. 256 pixels) and width (e.g. 144 pixels)
@@ -673,7 +701,7 @@ Neural networks are ideal for situations where the relation between the input (h
 
 .pull-left[
 
-`keras::dataset_mnist()` retrieves the MNIST dataset from the online repository. &lt;br&gt; Alternatively, the dataset can be loaded from the course directory.
+`keras::dataset_mnist()` retrieves the MNIST dataset from the online repository. &lt;br&gt; Alternatively, the dataset can be loaded from the course material directory.
 
 ```r
 # download the dataset from the online repository
@@ -875,6 +903,14 @@ Many more activation functions: sigmoid, softmax, identity, etc. (see further).
 
 ---
 
+# Examples of activation functions
+
+&lt;img src="img/activations.jpg" width="250%" height="250%" style="display: block; margin: auto;" /&gt;
+
+Source: [https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
+
+---
+
 # From the simple neural network to ANNs
 
 .pull-left[
@@ -913,7 +949,10 @@ Using the neural nets terminology or language:
 
 * `\(L+1\)` layers in total, with input layer denoted as layer 0 and output layer as `\(L\)`
 
-* use `\(a\)` (from .KULbginline[activation]) to denote the output of a given neuron in a given layer. 
+* use `\(a\)` (from .KULbginline[activation]) to denote the output of a given neuron in a given layer
+
+* technically, .KULbginline[deep learning] refers to any neural network that has 
+2 or more hidden layers.
 
 ]
 
@@ -1012,7 +1051,7 @@ and gets transformed into the **.red[output]**.
 ]
 
 .pull-right[
-This sequential layer structure is really at the core of the Keras libary.
+This sequential layer structure is really at the core of the Keras library.
 
 
 ```r
@@ -1247,7 +1286,7 @@ Two primary arguments of concern for the final output layer:
    - binary classification: `activation = 'sigmoid'`
 ]
 .pull-right[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-48-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
 
 `\(f(y) = \frac{1}{1 + e^{-y}}\)`
 ]
@@ -1331,9 +1370,9 @@ class: clear
 ## ________________________________________________________________________________
 ## Layer (type)                        Output Shape                    Param #     
 ## ================================================================================
-## dense_1 (Dense)                     (None, 512)                     401920      
+## dense (Dense)                       (None, 512)                     401920      
 ## ________________________________________________________________________________
-## dense (Dense)                       (None, 10)                      5130        
+## dense_1 (Dense)                     (None, 10)                      5130        
 ## ================================================================================
 ## Total params: 407,050
 ## Trainable params: 407,050
@@ -1419,10 +1458,10 @@ model &lt;- model %&gt;%
 
 With `loss = "categorical_crossentropy"` the loss of a single training observation is 
 
-$$ \sum_{j=0}^9 -p_j \cdot \log{(f(y_j))},   $$
-where `\(j\)` runs over the classes in the multi-class prediction problem, `\(f(y_j)\)` is the fitted probability of class `\(j\)` and `\(p_j\)` is a 0/1 hot-encoding of the truly observed class.
+$$ \sum_{j=0}^9 -y_j \cdot \log{(f(s_j))},   $$
+where `\(j\)` runs over the classes in the multi-class prediction problem, `\(f(s_j)\)` is the fitted probability of class `\(j\)` and `\(y_j\)` is a 0/1 hot-encoding of the truly observed class.
 
-For instance, when the true input digit is 1 the vector `\(p\)` is `\((0, 1, 0, 0, \ldots, 0)\)`.
+For instance, when the true input digit is 1 the vector `\(y\)` is `\((0, 1, 0, 0, \ldots, 0)\)`.
 
 ]
 
@@ -1860,8 +1899,11 @@ With .KULbginline[dropout]:
 ```r
 model %&gt;% 
   evaluate(test_input, test_output, verbose = 0)
-##      loss  accuracy 
-## 0.2336413 0.9341000
+## $loss
+## [1] 0.2336413
+## 
+## $accuracy
+## [1] 0.9341
 ```
 
 `predict(.)` returns a vector of length 10 with the probability per output node.
@@ -1965,7 +2007,7 @@ random &lt;- matrix(runif(28^2), nrow = 1)
 plot_image(random[1, ])
 ```
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-80-1.png" width="360" height="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-81-1.png" width="360" height="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -2490,7 +2532,7 @@ gam_ageph &lt;- gam(nclaims ~ s(ageph),
 ]
 
 .pull-right[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-106-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-107-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -2573,7 +2615,7 @@ cann %&gt;% compile(loss = 'poisson', optimize = optimizer_rmsprop())
 
 ```{=html}
 &lt;div id="htmlwidget-76c7b0e4dfca990a73d9" style="width:504px;height:504px;" class="grViz html-widget"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9"&gt;{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,6!\"] \n  \"2\" [label = \"batch_normalization\nBatchNormalization\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"3\" [label = \"dense_1\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"4\" [label = \"dense\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"5\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,6!\"] \n  \"6\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"7\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"-&gt;\"2\" \n  \"2\"-&gt;\"3\" \n  \"3\"-&gt;\"4\" \n  \"4\"-&gt;\"6\" \n  \"5\"-&gt;\"6\" \n  \"6\"-&gt;\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}&lt;/script&gt;
+&lt;script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9"&gt;{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,6!\"] \n  \"2\" [label = \"batch_normalization_1\nBatchNormalization\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"3\" [label = \"dense_5\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"4\" [label = \"dense_4\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"5\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,6!\"] \n  \"6\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"7\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"-&gt;\"2\" \n  \"2\"-&gt;\"3\" \n  \"3\"-&gt;\"4\" \n  \"4\"-&gt;\"6\" \n  \"5\"-&gt;\"6\" \n  \"6\"-&gt;\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}&lt;/script&gt;
 ```
 ]
 
@@ -2609,12 +2651,12 @@ cann %&gt;% fit(x = cann_input,
 # Adding a skip connection in a neural network (cont.)
 
 .pull-left[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-117-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-118-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .pull-right[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-118-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-119-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -2646,7 +2688,7 @@ nn_sev_log %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_log, 1) %&gt;% exp() %&gt;% as.numeric()
-## [1] 451.9699
+## [1] 452.0748
 ```
 ]
 
@@ -2725,7 +2767,7 @@ nn_sev_gamma %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_gamma, 1) %&gt;% as.numeric()
-## [1] 1139.389
+## [1] 1044.306
 ```
 
 ]
@@ -3038,7 +3080,7 @@ A useful feature for classifying the number four is the presence of straight, .h
 
 .hi-pink[Q]: How should the .hi-pink[kernel] look to detect this feature?
   
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-137-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-138-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -3267,7 +3309,7 @@ cbind(category, actual_category)[93,]
 ##        category actual_category 
 ##               4               9
 ```
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-155-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-156-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -3283,7 +3325,7 @@ str(filters)
 
 .hi-pink[Q:] can you find an interpretation for each of these filters?
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-157-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-158-1.png" width="30%" style="display: block; margin: auto;" /&gt;
 
 ---
 name: yourturn
