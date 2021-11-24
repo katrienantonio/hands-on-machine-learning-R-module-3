@@ -81,7 +81,7 @@ name: checklist
   
   ```r
   version$version.string
-  ## [1] "R version 3.6.2 (2019-12-12)"
+  ## [1] "R version 4.0.3 (2020-10-10)"
   ```
 
 ☑ Do you have a fairly recent version of RStudio? 
@@ -1370,9 +1370,9 @@ class: clear
 ## ________________________________________________________________________________
 ## Layer (type)                        Output Shape                    Param #     
 ## ================================================================================
-## dense (Dense)                       (None, 512)                     401920      
+## dense_1 (Dense)                     (None, 512)                     401920      
 ## ________________________________________________________________________________
-## dense_1 (Dense)                     (None, 10)                      5130        
+## dense (Dense)                       (None, 10)                      5130        
 ## ================================================================================
 ## Total params: 407,050
 ## Trainable params: 407,050
@@ -1899,11 +1899,8 @@ With .KULbginline[dropout]:
 ```r
 model %&gt;% 
   evaluate(test_input, test_output, verbose = 0)
-## $loss
-## [1] 0.2336413
-## 
-## $accuracy
-## [1] 0.9341
+##      loss  accuracy 
+## 0.2336413 0.9341000
 ```
 
 `predict(.)` returns a vector of length 10 with the probability per output node.
@@ -2615,7 +2612,7 @@ cann %&gt;% compile(loss = 'poisson', optimize = optimizer_rmsprop())
 
 ```{=html}
 &lt;div id="htmlwidget-76c7b0e4dfca990a73d9" style="width:504px;height:504px;" class="grViz html-widget"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9"&gt;{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,6!\"] \n  \"2\" [label = \"batch_normalization_1\nBatchNormalization\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"3\" [label = \"dense_5\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"4\" [label = \"dense_4\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"5\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,6!\"] \n  \"6\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"7\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"-&gt;\"2\" \n  \"2\"-&gt;\"3\" \n  \"3\"-&gt;\"4\" \n  \"4\"-&gt;\"6\" \n  \"5\"-&gt;\"6\" \n  \"6\"-&gt;\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}&lt;/script&gt;
+&lt;script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9"&gt;{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,6!\"] \n  \"2\" [label = \"batch_normalization_1\nBatchNormalization\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"3\" [label = \"dense_8\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"4\" [label = \"dense_7\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"5\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,6!\"] \n  \"6\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"7\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"-&gt;\"2\" \n  \"2\"-&gt;\"3\" \n  \"3\"-&gt;\"4\" \n  \"4\"-&gt;\"6\" \n  \"5\"-&gt;\"6\" \n  \"6\"-&gt;\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}&lt;/script&gt;
 ```
 ]
 
@@ -2688,7 +2685,7 @@ nn_sev_log %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_log, 1) %&gt;% exp() %&gt;% as.numeric()
-## [1] 452.0748
+## [1] 452.6078
 ```
 ]
 
@@ -2767,208 +2764,13 @@ nn_sev_gamma %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_gamma, 1) %&gt;% as.numeric()
-## [1] 1044.306
+## [1] 1391.865
 ```
 
 ]
 
 ---
 
-name: yourturn
-class: clear
-
-.left-column[
-
-&lt;!-- Add icon library --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
-
-## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
-
-]
-
-
-.right-column[
-
-Time to .KULbginline[apply] everything you learned on neural networks in a .KULbginline[claim frequency case study]! &lt;br&gt;
-The goal is to .hi-pink[fit] a couple of neural nets on `mtpl_train` and to .hi-pink[evaluate] those models on `mtpl_test`.
-
-**Step 1**: master .KULbginline[data pre-processing]!
-
-* Write a .hi-pink[recipe] to prepare the input data.  &lt;br&gt; Feel free to check the {recipes} [reference page](https://tidymodels.github.io/recipes/reference/index.html) for inspiration.
-
-* Your recipe should contain at least the following .hi-pink[steps]:&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; remove the features `id`, `amount`, `avg`, `town` and `pc` with `step_rm`.&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; normalize all numeric features with `step_normalize`.&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; dummy encode all nominal features with `step_dummy`.&lt;br&gt;
-
-* .hi-pink[Bake] the training and test data following your recipe.
-
-* Make the train and test data .hi-pink[NN proof] as follows:&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; create .hi-pink[vectors] for both `nclaims` and `expo`.&lt;br&gt;
-&amp;nbsp;&amp;nbsp;&amp;#9675; create a .hi-pink[matrix] for the input features via `as.matrix()`.
-]
-
----
-name: yourturn
-class: clear
-
-.left-column[
-
-&lt;!-- Add icon library --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
-
-## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
-
-]
-
-
-.right-column[
-
-**Step 2**: let's move to .KULbginline[model building].
-
-* .hi-pink[Compile] and .hi-pink[fit] a couple of neural networks on the pre-processed training data. &lt;br&gt; You are completely free to specify the architecture of your choice. 
-
-* You can .hi-pink[experiment] with the following options:&lt;br&gt;
-&amp;#9675; the number of layers,&lt;br&gt;
-&amp;#9675; the number of nodes per layer,&lt;br&gt;
-&amp;#9675; the batch size,&lt;br&gt;
-&amp;#9675; the activation functions,&lt;br&gt;
-&amp;#9675; adding dropout layers,&lt;br&gt;
-&amp;#9675; including batch normalization after some layers,&lt;br&gt;
-&amp;#9675; ...&lt;br&gt;
-
-* If you want to include exposure, either use .hi-pink[weights] or a .hi-pink[skip] connection.
-
-**Step 3**: now continue with the .KULbginline[model evaluation].
-
-* .hi-pink[Evaluate] your models on the test data via `evaluate`. Which architecture is the winner?
-
-* .hi-pink[Compare] your favorite neural network with a GLM, GAM or GBM. Which model is preferred?
-
-]
-
----
-
-class:clear
-
-.pull-left[
-.hi-pink[Step 1]: data pre-processing with {recipes}
-
-```r
-library(recipes)
-
-# Create and prepare the recipe
-mtpl_recipe &lt;- recipe(nclaims ~ ., data = mtpl_train) %&gt;%
-  step_rm(id, amount, avg, town, pc) %&gt;%
-  step_nzv(all_predictors(), -expo) %&gt;%
-  step_normalize(all_numeric(), -c(nclaims, expo)) %&gt;%
-  step_dummy(all_nominal(), one_hot = TRUE) %&gt;%
-  prep(mtpl_train)
-
-# Bake the training and test data
-mtpl_train_b &lt;- mtpl_recipe %&gt;% juice()
-mtpl_test_b &lt;- mtpl_recipe %&gt;% bake(new_data = mtpl_test)
-
-# Make the data NN proof
-train_x &lt;- mtpl_train_b %&gt;% 
-  dplyr::select(-c(nclaims, expo)) %&gt;% as.matrix()
-test_x &lt;- mtpl_test_b %&gt;% 
-  dplyr::select(-c(nclaims, expo)) %&gt;% as.matrix()
-
-train_y &lt;- mtpl_train_b$nclaims
-test_y &lt;- mtpl_test_b$nclaims
-
-train_expo &lt;- mtpl_train_b$expo
-test_expo &lt;- mtpl_test_b$expo
-```
-]
-
-.pull-right[
-.hi-pink[Step 2]: a possible NN architecture with 2 hidden layers
-
-```r
-nn_case &lt;- keras_model_sequential() %&gt;% 
-  layer_dense(units = 20,
-              activation = 'relu', 
-              input_shape = ncol(train_x)) %&gt;%
-  layer_dense(units = 10,
-              activation = 'relu') %&gt;% 
-  layer_dense(units = 1, 
-              activation = 'exponential') %&gt;%
-  compile(loss = 'poisson',
-          optimize = optimizer_nadam())
-  
-nn_case %&gt;%
-  fit(x = train_x,
-      y = train_y / train_expo,
-      sample_weight = train_expo,
-      epochs = 20,
-      batch_size = 1024, 
-      validation_split = 0,
-      verbose = 0)
-```
-
-
-]
-
----
-
-class:clear
-
-.pull-left[
-.hi-pink[Step 3a]: evaluate the NN on the test data
-
-```r
-# Built-in evaluation
-nn_case %&gt;%
-  evaluate(x = test_x,
-           y = test_y,
-           verbose = 0)
-##      loss 
-## 0.3741113
-
-# If you want to check the results
-poisson_loss &lt;- function(pred, actual) {
-  mean(pred - actual * log(pred))
-}
-poisson_loss(predict(nn_case, test_x),
-             test_y)
-## [1] 0.3741113
-
-# Use array for weights in evaluate
-nn_case %&gt;% 
-  evaluate(x = test_x,
-           y = test_y,
-           sample_weight = array(test_expo),
-           verbose = 0)
-##      loss 
-## 0.3413752
-```
-
-]
-
-.pull-right[
-.hi-pink[Step 3b]: compare the NN performance with a GAM
-
-```r
-gam_case &lt;- gam(
-  nclaims ~ coverage + fuel + sex +
-    s(ageph) + s(bm) + s(power) + s(agec),
-  data = mtpl_train,
-  offset = log(expo),
-  family = poisson(link = 'log')
-  )
-
-poisson_loss(predict(gam_case, mtpl_test,
-                     type = 'response'),
-             test_y)
-## [1] 0.3746941
-```
-
-
-]
-
----
 class: inverse, center, middle
 name: cnn
 
@@ -3080,7 +2882,7 @@ A useful feature for classifying the number four is the presence of straight, .h
 
 .hi-pink[Q]: How should the .hi-pink[kernel] look to detect this feature?
   
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-138-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-133-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -3309,7 +3111,7 @@ cbind(category, actual_category)[93,]
 ##        category actual_category 
 ##               4               9
 ```
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-156-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-151-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -3325,7 +3127,7 @@ str(filters)
 
 .hi-pink[Q:] can you find an interpretation for each of these filters?
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-158-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-153-1.png" width="30%" style="display: block; margin: auto;" /&gt;
 
 ---
 name: yourturn
@@ -3594,6 +3396,203 @@ gridExtra::grid.arrange(
 ```
 
 &lt;img src="img/neural_network_auto_encoder_noise.png" width="500" height="300" style="display: block; margin: auto;" /&gt;
+
+---
+
+name: yourturn
+class: clear
+
+.left-column[
+
+&lt;!-- Add icon library --&gt;
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+
+## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
+
+]
+
+
+.right-column[
+
+Time to .KULbginline[apply] everything you learned on neural networks in a .KULbginline[claim frequency case study]! &lt;br&gt;
+The goal is to .hi-pink[fit] a couple of neural nets on `mtpl_train` and to .hi-pink[evaluate] those models on `mtpl_test`.
+
+**Step 1**: master .KULbginline[data pre-processing]!
+
+* Write a .hi-pink[recipe] to prepare the input data.  &lt;br&gt; Feel free to check the {recipes} [reference page](https://tidymodels.github.io/recipes/reference/index.html) for inspiration.
+
+* Your recipe should contain at least the following .hi-pink[steps]:&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; remove the features `id`, `amount`, `avg`, `town` and `pc` with `step_rm`.&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; normalize all numeric features with `step_normalize`.&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; dummy encode all nominal features with `step_dummy`.&lt;br&gt;
+
+* .hi-pink[Bake] the training and test data following your recipe.
+
+* Make the train and test data .hi-pink[NN proof] as follows:&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; create .hi-pink[vectors] for both `nclaims` and `expo`.&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;#9675; create a .hi-pink[matrix] for the input features via `as.matrix()`.
+]
+
+---
+name: yourturn
+class: clear
+
+.left-column[
+
+&lt;!-- Add icon library --&gt;
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+
+## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
+
+]
+
+
+.right-column[
+
+**Step 2**: let's move to .KULbginline[model building].
+
+* .hi-pink[Compile] and .hi-pink[fit] a couple of neural networks on the pre-processed training data. &lt;br&gt; You are completely free to specify the architecture of your choice. 
+
+* You can .hi-pink[experiment] with the following options:&lt;br&gt;
+&amp;#9675; the number of layers,&lt;br&gt;
+&amp;#9675; the number of nodes per layer,&lt;br&gt;
+&amp;#9675; the batch size,&lt;br&gt;
+&amp;#9675; the activation functions,&lt;br&gt;
+&amp;#9675; adding dropout layers,&lt;br&gt;
+&amp;#9675; including batch normalization after some layers,&lt;br&gt;
+&amp;#9675; ...&lt;br&gt;
+
+* If you want to include exposure, either use .hi-pink[weights] or a .hi-pink[skip] connection.
+
+**Step 3**: now continue with the .KULbginline[model evaluation].
+
+* .hi-pink[Evaluate] your models on the test data via `evaluate`. Which architecture is the winner?
+
+* .hi-pink[Compare] your favorite neural network with a GLM, GAM or GBM. Which model is preferred?
+
+]
+
+---
+
+class:clear
+
+.pull-left[
+.hi-pink[Step 1]: data pre-processing with {recipes}
+
+```r
+library(recipes)
+
+# Create and prepare the recipe
+mtpl_recipe &lt;- recipe(nclaims ~ ., data = mtpl_train) %&gt;%
+  step_rm(id, amount, avg, town, pc) %&gt;%
+  step_nzv(all_predictors(), -expo) %&gt;%
+  step_normalize(all_numeric(), -c(nclaims, expo)) %&gt;%
+  step_dummy(all_nominal(), one_hot = TRUE) %&gt;%
+  prep(mtpl_train)
+
+# Bake the training and test data
+mtpl_train_b &lt;- mtpl_recipe %&gt;% juice()
+mtpl_test_b &lt;- mtpl_recipe %&gt;% bake(new_data = mtpl_test)
+
+# Make the data NN proof
+train_x &lt;- mtpl_train_b %&gt;% 
+  dplyr::select(-c(nclaims, expo)) %&gt;% as.matrix()
+test_x &lt;- mtpl_test_b %&gt;% 
+  dplyr::select(-c(nclaims, expo)) %&gt;% as.matrix()
+
+train_y &lt;- mtpl_train_b$nclaims
+test_y &lt;- mtpl_test_b$nclaims
+
+train_expo &lt;- mtpl_train_b$expo
+test_expo &lt;- mtpl_test_b$expo
+```
+]
+
+.pull-right[
+.hi-pink[Step 2]: a possible NN architecture with 2 hidden layers
+
+```r
+nn_case &lt;- keras_model_sequential() %&gt;% 
+  layer_dense(units = 20,
+              activation = 'relu', 
+              input_shape = ncol(train_x)) %&gt;%
+  layer_dense(units = 10,
+              activation = 'relu') %&gt;% 
+  layer_dense(units = 1, 
+              activation = 'exponential') %&gt;%
+  compile(loss = 'poisson',
+          optimize = optimizer_nadam())
+  
+nn_case %&gt;%
+  fit(x = train_x,
+      y = train_y / train_expo,
+      sample_weight = train_expo,
+      epochs = 20,
+      batch_size = 1024, 
+      validation_split = 0,
+      verbose = 0)
+```
+
+
+]
+
+---
+
+class:clear
+
+.pull-left[
+.hi-pink[Step 3a]: evaluate the NN on the test data
+
+```r
+# Built-in evaluation
+nn_case %&gt;%
+  evaluate(x = test_x,
+           y = test_y,
+           verbose = 0)
+##      loss 
+## 0.3741113
+
+# If you want to check the results
+poisson_loss &lt;- function(pred, actual) {
+  mean(pred - actual * log(pred))
+}
+poisson_loss(predict(nn_case, test_x),
+             test_y)
+## [1] 0.3741113
+
+# Use array for weights in evaluate
+nn_case %&gt;% 
+  evaluate(x = test_x,
+           y = test_y,
+           sample_weight = array(test_expo),
+           verbose = 0)
+##      loss 
+## 0.3413752
+```
+
+]
+
+.pull-right[
+.hi-pink[Step 3b]: compare the NN performance with a GAM
+
+```r
+gam_case &lt;- gam(
+  nclaims ~ coverage + fuel + sex +
+    s(ageph) + s(bm) + s(power) + s(agec),
+  data = mtpl_train,
+  offset = log(expo),
+  family = poisson(link = 'log')
+  )
+
+poisson_loss(predict(gam_case, mtpl_test,
+                     type = 'response'),
+             test_y)
+## [1] 0.3746941
+```
+
+
+]
+
 
 ---
 name: wrap-up
