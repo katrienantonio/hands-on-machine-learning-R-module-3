@@ -1,14 +1,14 @@
 
-## Workshop Hands-on Machine Learning in R, November 2021 edition
+## Workshop Hands-on Machine Learning in R, December 2021 - January 2022 edition
 
 by Katrien Antonio, Jonas Crevecoeur and Roel Henckaerts
 
 Course materials for the *Hands-on Machine Learning in R* course
-(November 2021).
+(December 2021 - January 2022)..
 
-📆 Module 1 on November 8 & 10, 2021, Module 2 on November 15 & 17, 2021
-and Module 3 on November 22 & 24, 2021 <br> 🕧 From 9.00 am to 12.00 pm
-<br> 📌 online, organized by Capgemini Academy and Nationale Nederlanden
+📆 Module 1 on December 2 & 9, 2021, Module 2 on January 13 & 20, 2022
+and Module 3 on January 27 & February 3, 2022 <br> 🕡 From 9.30 am to
+12.30 pm <br> 📌 online, organized by Actuarieel Instituut
 
 Course materials will be posted in the week before the workshop. You are
 now on the landing page for **Module 3: neural networks**.
@@ -66,15 +66,15 @@ detailed schedule is subject to small changes.
 | :------: | :-------: | ----------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------- |
 | Prework  |           | your own pace           | check the Prework and Software Requirements instructions |                                                                                                                   |                                                                                                             |             |
 | Prework  |           | day before the workshop | download the course material from the GitHub repo        |                                                                                                                   |                                                                                                             |             |
-| Module 3 | Session 1 | 09.00 - 09.40           | Toolbox and tensors                                      | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#start)        | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/1_getting_started.R) |             |
-|          |           | 09.40 - 10.00           | MNIST data                                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#data-sets)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
-|          |           | 10.10 - 10.40           | De-mystifying neural networks                            | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#demystify)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
-|          |           | 10.40 - 12.00           | Neural networks in {keras}                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#fundamentals) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
-| Module 3 | Session 2 | 9.00 - 9.40             | Claim frequency with neural nets                         | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
-|          |           | 9.40 - 10.00            | Adding a skip connection                                 | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
-|          |           | 10.00 - 10.40           | CNNs                                                     | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#cnn)          | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/4_convolutional.R)   |             |
-|          |           | 10.50 - 11.00           | Autoencoders                                             | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#autoencoder)  | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/5_auto_encoder.R)    |             |
-|          |           | 11.10 - 12.00           | Working on case study                                    |                                                                                                                   |                                                                                                             |             |
+| Module 3 | Session 1 | 09.30 - 10.10           | Toolbox and tensors                                      | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#start)        | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/1_getting_started.R) |             |
+|          |           | 10.10 - 10.30           | MNIST data                                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#data-sets)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
+|          |           | 10.40 - 11.10           | De-mystifying neural networks                            | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#demystify)    | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
+|          |           | 11.10 - 12.30           | Neural networks in {keras}                               | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#fundamentals) | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/2_fundamentals.R)    |             |
+| Module 3 | Session 2 | 9.30 - 10.10            | Claim frequency with neural nets                         | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
+|          |           | 10.10 - 10.30           | Adding a skip connection                                 | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#regression)   | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/3_regression.R)      |             |
+|          |           | 10.30 - 11.10           | CNNs                                                     | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#cnn)          | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/4_convolutional.R)   |             |
+|          |           | 11.20 - 11.30           | Autoencoders                                             | [sheets](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/sheets/ML_part3.html#autoencoder)  | [script](https://katrienantonio.github.io/hands-on-machine-learning-R-module-3/scripts/5_auto_encoder.R)    |             |
+|          |           | 11.30 - 12.30           | Working on case study                                    |                                                                                                                   |                                                                                                             |             |
 
 ##### Module 3: Neural networks
 
