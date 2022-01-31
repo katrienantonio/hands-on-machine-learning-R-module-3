@@ -2575,25 +2575,41 @@ A skip connection allows us to guide the neural net in the right direction and t
 ---
 # Adding a skip connection in a neural network (cont.)
 
-Create two .hi-pink[input layers] via `layer_input`, one for the skip connection and one for the neural network:
+Structure of the CANN model we are going to implement
+
+&lt;img src="img/structure_cann.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+# Adding a skip connection in a neural network (cont.)
+
+Construct the first neural network for the input covariate `age`. Apply no activation function in the final layer (= linear activation function). The exponential activation function will be applied later after adding the value from the skip connection.
+
+```r
+input_nn &lt;- layer_input(shape = c(1), name = 'nn')
+
+output_nn &lt;- input_nn %&gt;% 
+  layer_dense(units = 5, activation = 'tanh') %&gt;%
+  layer_dense(units = 1, activation = `NULL`)
+```
+
+Create an input for the skip connection.
 
 ```r
 input_skip &lt;- layer_input(shape = c(1), name = 'skip')
-input_nn &lt;- layer_input(shape = c(1), name = 'nn')
 ```
 
-Specify the .hi-pink[architecture] to use for the neural net part with a .hi-pink[linear] combination of the hidden nodes as output:
+---
+# Adding a skip connection in a neural network (cont.)
+
+.hi-pink[Combine] the neural network and skip connection via `layer_add` and pass through the `exponential` function with fixed weights (bias zero, weights 1):
 
 ```r
-network &lt;- input_nn %&gt;% layer_batch_normalization() %&gt;% layer_dense(units = 5, activation = 'tanh') %&gt;%
-  layer_dense(units = 1, activation = `'linear'`)
-```
-
-.hi-pink[Combine] the neural network and skip connection via `layer_add` and pass through the `exponential` function with fixed weights:
-
-```r
-output &lt;- list(network, input_skip) %&gt;% layer_add() %&gt;% 
-  layer_dense(units = 1, activation = 'exponential', `trainable = FALSE`, name = 'output',
+output &lt;- list(output_nn, input_skip) %&gt;% 
+  layer_add() %&gt;% 
+  layer_dense(units = 1, 
+              activation = 'exponential',
+              `trainable = FALSE`, 
+              name = 'output',
               weights = list(array(`1`, dim = c(1,1)), array(`0`, dim = c(1))))
 ```
 
@@ -2609,11 +2625,8 @@ cann %&gt;% compile(loss = 'poisson', optimize = optimizer_rmsprop())
 
 .pull-left[
 
-
-```{=html}
-&lt;div id="htmlwidget-76c7b0e4dfca990a73d9" style="width:504px;height:504px;" class="grViz html-widget"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9"&gt;{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,6!\"] \n  \"2\" [label = \"batch_normalization_1\nBatchNormalization\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"3\" [label = \"dense_8\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"4\" [label = \"dense_7\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"5\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,6!\"] \n  \"6\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"7\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"-&gt;\"2\" \n  \"2\"-&gt;\"3\" \n  \"3\"-&gt;\"4\" \n  \"4\"-&gt;\"6\" \n  \"5\"-&gt;\"6\" \n  \"6\"-&gt;\"7\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}&lt;/script&gt;
-```
+<div id="htmlwidget-76c7b0e4dfca990a73d9" style="width:504px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"2\" [label = \"dense\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"3\" [label = \"dense_1\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"4\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,5!\"] \n  \"5\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"6\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"->\"2\" \n  \"2\"->\"3\" \n  \"3\"->\"5\" \n  \"4\"->\"5\" \n  \"5\"->\"6\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -2648,12 +2661,12 @@ cann %&gt;% fit(x = cann_input,
 # Adding a skip connection in a neural network (cont.)
 
 .pull-left[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-118-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-119-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .pull-right[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-119-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-120-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -2685,7 +2698,7 @@ nn_sev_log %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_log, 1) %&gt;% exp() %&gt;% as.numeric()
-## [1] 452.6078
+## [1] 451.4198
 ```
 ]
 
@@ -2764,7 +2777,7 @@ nn_sev_gamma %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_gamma, 1) %&gt;% as.numeric()
-## [1] 1391.865
+## [1] 1446.958
 ```
 
 ]
@@ -2882,7 +2895,7 @@ A useful feature for classifying the number four is the presence of straight, .h
 
 .hi-pink[Q]: How should the .hi-pink[kernel] look to detect this feature?
   
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-133-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-134-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -3111,7 +3124,7 @@ cbind(category, actual_category)[93,]
 ##        category actual_category 
 ##               4               9
 ```
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-151-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-152-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -3127,7 +3140,7 @@ str(filters)
 
 .hi-pink[Q:] can you find an interpretation for each of these filters?
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-153-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-154-1.png" width="30%" style="display: block; margin: auto;" /&gt;
 
 ---
 name: yourturn
