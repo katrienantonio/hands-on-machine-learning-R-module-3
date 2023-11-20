@@ -4,38 +4,43 @@
     <title>Hands-on Machine Learning with R - Module 3</title>
     <meta charset="utf-8" />
     <meta name="author" content="Katrien Antonio, Jonas Crevecoeur &amp; Roel Henckaerts" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
-    <script src="libs/viz/viz.js"></script>
-    <link href="libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
-    <script src="libs/grViz-binding/grViz.js"></script>
     <link rel="stylesheet" href="css/metropolis.css" type="text/css" />
     <link rel="stylesheet" href="css/metropolis-fonts.css" type="text/css" />
     <link rel="stylesheet" href="css/my-css.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
+
+
+
+
+
+
+
+
+
+class: bottom, left, title-slide, clear
+
+background-image: url('img/beamer_title_KUL.png')
+background-size: contain
+
+name: titlepage
 
 # Hands-on Machine Learning with R - Module 3
-## Hands-on webinar
-<html>
-<div style="float:left">
 
-</div>
-<hr align='center' color='#116E8A' size=1px width=97%>
-</html>
-### Katrien Antonio, Jonas Crevecoeur &amp; Roel Henckaerts
-### <a href="https://github.com/katrienantonio/hands-on-machine-learning-R-module-3">hands-on-machine-learning-R-module-3</a> | January 27 and February 3, 2022
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#FAFAFA' size=1px width=100%&gt;&lt;/html&gt;
+
+&lt;span style="color:#FAFAFA;font-size:18.0pt"&gt;
+Katrien Antonio &amp; Roel Henckaerts &amp; Jonas Crevecoeur &lt;br&gt; &lt;br&gt; 
+&lt;/span&gt;
+
+&lt;span style="color:#FAFAFA;font-size:14.0pt"&gt;
+Webinar | October - November, 2023&lt;br&gt;
+&lt;/span&gt;
 
 ---
-
-
-
-
-
-
-
 
 class: inverse, center, middle
 name: prologue
@@ -46,13 +51,14 @@ name: prologue
 
 ---
 
+
 name: introduction
 
 # Introduction
 
 ### Course
 
-&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 496 512"&gt;&lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/&gt;&lt;/svg&gt; https://github.com/katrienantonio/hands-on-machine-learning-R-module-3
+<svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> https://github.com/katrienantonio/hands-on-machine-learning-R-module-3
 
 The course repo on GitHub, where you can find the data sets, lecture sheets, R scripts and R markdown files.
 
@@ -60,16 +66,15 @@ The course repo on GitHub, where you can find the data sets, lecture sheets, R s
 
 ### Us
 
-&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 512 512"&gt;&lt;path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/&gt;&lt;/svg&gt; [https://katrienantonio.github.io/](https://katrienantonio.github.io/) &amp; [https://jonascrevecoeur.github.io/](https://jonascrevecoeur.github.io/) &amp; [https://henckr.github.io/](https://henckr.github.io/)
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></svg> [https://katrienantonio.github.io/](https://katrienantonio.github.io/) &amp; [https://be.linkedin.com/in/jonascrevecoeur](LinkedIn Jonas) &amp; [https://be.linkedin.com/in/roelhenckaerts](LinkedIn Roel)
 
-&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 512 512"&gt;&lt;path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/&gt;&lt;/svg&gt; [katrien.antonio@kuleuven.be](mailto:katrien.antonio@kuleuven.be) &amp; [jonas.crevecoeur@kuleuven.be](mailto:jonas.crevecoeur@kuleuven.be) &amp;  [roel.henckaerts@kuleuven.be](mailto:roel.henckaerts@kuleuven.be)
+<svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M16.1 260.2c-22.6 12.9-20.5 47.3 3.6 57.3L160 376V479.3c0 18.1 14.6 32.7 32.7 32.7c9.7 0 18.9-4.3 25.1-11.8l62-74.3 123.9 51.6c18.9 7.9 40.8-4.5 43.9-24.7l64-416c1.9-12.1-3.4-24.3-13.5-31.2s-23.3-7.5-34-1.4l-448 256zm52.1 25.5L409.7 90.6 190.1 336l1.2 1L68.2 285.7zM403.3 425.4L236.7 355.9 450.8 116.6 403.3 425.4z"/></svg> [katrien.antonio@kuleuven.be](mailto:katrien.antonio@kuleuven.be) &amp;  [roel.henckaerts@kuleuven.be](mailto:roel.henckaerts@kuleuven.be)
 
-&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Katrien) Professor in insurance data science
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9v28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5V291.9c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z"/></svg> (Katrien) Professor in insurance data science
 
-&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Jonas) Postdoc and consultant in statistics and data science
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9v28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5V291.9c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z"/></svg> (Jonas) PhD in insurance data science, now consultant in statistics, data science and data engineering with Data Minded
 
-&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 640 512"&gt;&lt;path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/&gt;&lt;/svg&gt; (Roel) PhD in insurance data science, now consultant in data science with AI start up [Prophecy Labs](https://www.prophecylabs.com/)
-
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9v28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5V291.9c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z"/></svg> (Roel) PhD in insurance data science, now consultant in data science with AI start up [Prophecy Labs](https://www.prophecylabs.com/)
 
 ---
 
@@ -81,7 +86,7 @@ name: checklist
   
   ```r
   version$version.string
-  ## [1] "R version 4.0.3 (2020-10-10)"
+  ## [1] "R version 4.3.1 (2023-06-16 ucrt)"
   ```
 
 ☑ Do you have a fairly recent version of RStudio? 
@@ -90,12 +95,40 @@ name: checklist
   RStudio.Version()$version
   ## Requires an interactive session but should return something like "[1] ‘1.3.1093’"
   ```
+  
+☑ Do you have a fairly recent version of Python?
+
+
+```r
+library(reticulate)
+reticulate::py_discover_config()
+```
+
+---
+
+name: checklist (cont'd)
+
+# Checklist (cont'd)
 
 ☑ Have you installed the R packages listed in the software requirements? 
 
+☑ Did you go through the installation of Python libraries {tensorflow} and {keras}? 
+
+
+```r
+library(keras)
+library(tensorflow)
+path_to_python &lt;- "C:/Users/.../AppData/Local/Programs/Python/Python311/python.exe" 
+# specify path to your Python version 
+virtualenv_create("r-reticulate", python = path_to_python)
+install_tensorflow(envname = "r-reticulate")
+install_keras(envname = "r-reticulate")
+use_virtualenv("r-reticulate")
+```
+
 or
 
-☑ Have you created an account on RStudio Cloud (to avoid any local installation issues)?
+☑ Have you created an account on posit cloud (to avoid any local installation issues)?
   
 ---
 
@@ -103,7 +136,7 @@ name: why-this-course # inspired by Grant McDermott intro lecture
 
 # Why this course?
 
-### The goals of this module .font140[&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 512 512"&gt;&lt;path d="M505.05 19.1a15.89 15.89 0 0 0-12.2-12.2C460.65 0 435.46 0 410.36 0c-103.2 0-165.1 55.2-211.29 128H94.87A48 48 0 0 0 52 154.49l-49.42 98.8A24 24 0 0 0 24.07 288h103.77l-22.47 22.47a32 32 0 0 0 0 45.25l50.9 50.91a32 32 0 0 0 45.26 0L224 384.16V488a24 24 0 0 0 34.7 21.49l98.7-49.39a47.91 47.91 0 0 0 26.5-42.9V312.79c72.59-46.3 128-108.4 128-211.09.1-25.2.1-50.4-6.85-82.6zM384 168a40 40 0 1 1 40-40 40 40 0 0 1-40 40z"/&gt;&lt;/svg&gt;]
+### The goals of this module .font140[<svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M156.6 384.9L125.7 354c-8.5-8.5-11.5-20.8-7.7-32.2c3-8.9 7-20.5 11.8-33.8L24 288c-8.6 0-16.6-4.6-20.9-12.1s-4.2-16.7 .2-24.1l52.5-88.5c13-21.9 36.5-35.3 61.9-35.3l82.3 0c2.4-4 4.8-7.7 7.2-11.3C289.1-4.1 411.1-8.1 483.9 5.3c11.6 2.1 20.6 11.2 22.8 22.8c13.4 72.9 9.3 194.8-111.4 276.7c-3.5 2.4-7.3 4.8-11.3 7.2v82.3c0 25.4-13.4 49-35.3 61.9l-88.5 52.5c-7.4 4.4-16.6 4.5-24.1 .2s-12.1-12.2-12.1-20.9V380.8c-14.1 4.9-26.4 8.9-35.7 11.9c-11.2 3.6-23.4 .5-31.8-7.8zM384 168a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>]
 
 --
 
@@ -141,7 +174,9 @@ This presentation is based on
 
 * the work of prof. Taylor Arnold, in particular Chapter 8 in the book [A computational approach to statistical learning](https://www.routledge.com/A-Computational-Approach-to-Statistical-Learning/Arnold-Kane-Lewis/p/book/9780367570613) by Arnold, Kane &amp; Lewis (2019)
 
-* Boehmke (2020) on [Deep Learning with R: using Keras with TensorFlow backend](https://github.com/rstudio-conf-2020/dl-keras-tf).   
+* Boehmke (2020) on [Deep Learning with R: using Keras with TensorFlow backend](https://github.com/rstudio-conf-2020/dl-keras-tf)
+
+* our recent paper Holvoet, Antonio &amp; Henckaerts (2023, arxiv) on [Neural networks for insurance pricing with frequency and severity data: a benchmark study from data preprocessing to technical tariff](https://arxiv.org/abs/2310.12671) with replication code on [GitHub](https://github.com/freekholvoet/nnforfreqsevpricing).
 
 ]
 
@@ -163,7 +198,7 @@ Actuarial modelling with neural nets is covered in
 
 ---
 
-# Module 3's Outline
+# Module 3's outline
 
 .pull-left[
 
@@ -198,7 +233,7 @@ Actuarial modelling with neural nets is covered in
 * [Convolutional neural networks](#cnn)
   - Handling new data formats
   - Convolutional layers explained
-  - Evaluation and intepretation
+  - Evaluation and interpretation
   
 * [Auto encoders](#autoencoder)
   - Data compression and feature extraction
@@ -236,7 +271,7 @@ name: start
 
 # What's the excitement about?
 
-### .font140[&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 352 512"&gt;&lt;path d="M176 80c-52.94 0-96 43.06-96 96 0 8.84 7.16 16 16 16s16-7.16 16-16c0-35.3 28.72-64 64-64 8.84 0 16-7.16 16-16s-7.16-16-16-16zM96.06 459.17c0 3.15.93 6.22 2.68 8.84l24.51 36.84c2.97 4.46 7.97 7.14 13.32 7.14h78.85c5.36 0 10.36-2.68 13.32-7.14l24.51-36.84c1.74-2.62 2.67-5.7 2.68-8.84l.05-43.18H96.02l.04 43.18zM176 0C73.72 0 0 82.97 0 176c0 44.37 16.45 84.85 43.56 115.78 16.64 18.99 42.74 58.8 52.42 92.16v.06h48v-.12c-.01-4.77-.72-9.51-2.15-14.07-5.59-17.81-22.82-64.77-62.17-109.67-20.54-23.43-31.52-53.15-31.61-84.14-.2-73.64 59.67-128 127.95-128 70.58 0 128 57.42 128 128 0 30.97-11.24 60.85-31.65 84.14-39.11 44.61-56.42 91.47-62.1 109.46a47.507 47.507 0 0 0-2.22 14.3v.1h48v-.05c9.68-33.37 35.78-73.18 52.42-92.16C335.55 260.85 352 220.37 352 176 352 78.8 273.2 0 176 0z"/&gt;&lt;/svg&gt;] Neural networks are an exciting topic to explore, because:
+### .font140[<svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"/></svg>] Neural networks are an exciting topic to explore, because:
 
 --
 
@@ -262,38 +297,49 @@ name: start
 &lt;img src="img/modelflow.png" width="600" height="100" style="display: block; margin: auto;" /&gt;
 &lt;br&gt;
 
-* R: &lt;br&gt;Our favorite programming language, including an R interface to Keras and TensorFlow. 
+* R: &lt;br&gt;The workshop's programming language, including an R interface to Python Keras and TensorFlow. 
 
 * Keras: &lt;br&gt;An inuitive high level Python interface to TensorFlow.
 
 * TensorFlow: &lt;br&gt; Open source platform for machine learning developed by the Google Brain Team, see [https://www.tensorflow.org/](https://www.tensorflow.org/). &lt;br&gt; Special focus on training deep neural networks.
 
+---
+
+# More on the programming framework
+
+&lt;br&gt;
+.center[
+&lt;img src = "img/pytorch.png" height="200px" /&gt;
+]
+&lt;br&gt;
+
+* PyTorch: &lt;br&gt;  machine learning framework based on the Torch library, used for tensor computing and deep learning with applications such as computer vision and natural language processing; originally developed by Meta AI, see [https://pytorch.org/](https://pytorch.org/). 
+
+* In the Fall of 2023, Keras announced the release of [Keras Core](https://keras.io/keras_core/announcement/), making it possible to run Keras workflows on top of arbitrary frameworks, e.g. TensorFlow and PyTorch.
 
 ---
 
 # R packages
 
-Today's session will make extensive use of {keras} and {tidyverse}. &lt;br&gt;
+Today's session will make extensive use of {keras}, {tensorflow} and {tidyverse}. &lt;br&gt;
 Do not forget to load these packages in your R session.
 
 
 ```r
 library(keras)
+library(tensorflow)
 library(tidyverse)
 ```
 
-.pull-left[
 .center[
-&lt;img src = "img/keras.jpg" height="200px" /&gt;
-]
-]
-
-.pull-right[
-.center[
+&lt;img src = "img/keras.jpg" height="200px" /&gt; &amp;nbsp; &amp;nbsp; 
+&lt;img src = "img/tensorflow.png" height="200px" /&gt; &amp;nbsp; &amp;nbsp; 
 &lt;img src = "img/tidyverse.png" height="200px" /&gt;
 ]
-]
 
+Link to the documentation: 
+
+* [https://tensorflow.rstudio.com/](https://tensorflow.rstudio.com/)
 
 ---
 
@@ -336,12 +382,12 @@ What is a .hi-pink[tensor]?
 
 * A 1-dimensional tensor is a vector (e.g. closing daily stock price during 250 days)
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-5-1.png" width="300" height="20" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-7-1.png" width="300" height="20" style="display: block; margin: auto;" /&gt;
 
 --
 * A 2-dimensional tensor is a matrix (e.g. a tabular data set with observations and features)
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-6-1.png" width="300" height="100" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-8-1.png" width="300" height="100" style="display: block; margin: auto;" /&gt;
 
 * ...
 
@@ -442,7 +488,7 @@ Then, a collection of images can be stored in a 4D tensor `(samples, frames, hei
 .pull-left[
 Keras generalizes common R functions for inputs of type tensor. These functions can be recognized by the prefix `k_`.
 
-See the [Keras documentation](https://keras.rstudio.com/articles/backend.html#backend-functions) for a list of all tensor functions.
+A good introduction to working with tensors is [https://tensorflow.rstudio.com/guides/tensorflow/basics](https://tensorflow.rstudio.com/guides/tensorflow/basics).
 
 * `k_constant`: create and initialise a tensor. 
 
@@ -454,24 +500,32 @@ x
 ## [[1. 2.]
 ##  [3. 4.]
 ##  [5. 6.]], shape=(3, 2), dtype=float32)
+
+x$shape
+## TensorShape([3, 2])
+x$dtype
+## tf.float32
 ```
 ]
 
 .pull-right[
 Most tensor operations require an axis parameter to specify the dimensions over which the function should be performed.
 
+
+See the [Keras documentation](https://tensorflow.rstudio.com/reference/keras/#backend) for a list of all tensor functions. 
+
 * `k_mean`: calculate the mean of the tensor.
 
 
 ```r
 k_mean(x, axis = 1)
-## tf.Tensor([3. 4.], shape=(2,), dtype=float32)
+## tf.Tensor([3. 4.], shape=(2), dtype=float32)
 ```
 
 
 ```r
 k_mean(x, axis = 2)
-## tf.Tensor([1.5 3.5 5.5], shape=(3,), dtype=float32)
+## tf.Tensor([1.5 3.5 5.5], shape=(3), dtype=float32)
 ```
 
 ]
@@ -634,7 +688,7 @@ Predictor variables are:
 * continuous, numeric variables, e.g. age of the policyholder, age of the car
 * spatial information: postal code (in Belgium) of the municipality where the policyholder resides.
 
-More details in [Henckaerts et al. (2018, Scandinavian Actuarial Journal)](https://katrienantonio.github.io/projects/2019/06/13/machine-learning/#data-driven) and [Henckaerts et al. (2019, arxiv)](https://katrienantonio.github.io/projects/2019/06/13/machine-learning/#tree-based-pricing).
+More details in [Henckaerts et al. (2018, Scandinavian Actuarial Journal)](https://katrienantonio.github.io/projects/2019/06/13/machine-learning/#data-driven) and [Henckaerts et al. (2021, North American Actuarial Journal)](https://katrienantonio.github.io/projects/2019/06/13/machine-learning/#tree-based-pricing).
 
 ---
 
@@ -697,6 +751,7 @@ Neural networks are ideal for situations where the relation between the input (h
 ]
 
 ---
+
 # Loading the MNIST dataset
 
 .pull-left[
@@ -949,7 +1004,7 @@ Using the neural nets terminology or language:
 
 * `\(L+1\)` layers in total, with input layer denoted as layer 0 and output layer as `\(L\)`
 
-* use `\(a\)` (from .KULbginline[activation]) to denote the output of a given neuron in a given layer
+* use `\(a(.)\)` (from .KULbginline[activation]) or `\(\sigma(.)\)` to denote the output of a given neuron in a given layer
 
 * technically, .KULbginline[deep learning] refers to any neural network that has 
 2 or more hidden layers.
@@ -1286,7 +1341,7 @@ Two primary arguments of concern for the final output layer:
    - binary classification: `activation = 'sigmoid'`
 ]
 .pull-right[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 
 `\(f(y) = \frac{1}{1 + e^{-y}}\)`
 ]
@@ -1368,15 +1423,14 @@ class: clear
 ```
 ## Model: "sequential"
 ## ________________________________________________________________________________
-## Layer (type)                        Output Shape                    Param #     
+##  Layer (type)                       Output Shape                    Param #     
 ## ================================================================================
-## dense_1 (Dense)                     (None, 512)                     401920      
-## ________________________________________________________________________________
-## dense (Dense)                       (None, 10)                      5130        
+##  dense_1 (Dense)                    (None, 512)                     401920      
+##  dense (Dense)                      (None, 10)                      5130        
 ## ================================================================================
-## Total params: 407,050
-## Trainable params: 407,050
-## Non-trainable params: 0
+## Total params: 407050 (1.55 MB)
+## Trainable params: 407050 (1.55 MB)
+## Non-trainable params: 0 (0.00 Byte)
 ## ________________________________________________________________________________
 ```
 
@@ -1503,194 +1557,19 @@ Keras includes several .KULbginline[optimizers] for minimizing the loss function
 Popular choices are:
 * `optimizer_rmsprop()`
 * `optimizer_adam()`
-* other optimizers, see the [Keras documentation](https://keras.io/optimizers/)
+* other optimizers, see the [Keras documentation](https://keras.io/optimizers/).
+
+The goal is to find weights and bias terms that .KULbginline[minimize the loss function].
 
 ]
 
 .pull-right[
 
-The goal is to find weights and bias terms that .KULbginline[minimize the loss function].
+
 
 &lt;img src="img/forward_pass4.png" width="568" style="display: block; margin: auto;" /&gt;
 
 
-]
-
----
-
-# Gradient descent and backpropagation
-
-.pull-left[
-
-In general terms, we want to find (with `\(w\)` for all unknown parameters)
-
-`$$\min_{w} \mathcal{L}(w),$$`
-With .KULbginline[gradient descent]: we'll move in the direction the loss locally decreases the fastest!
-
-Thus, 
-
-`$$w_{\text{new}} = w_{\text{old}} - \eta \cdot \nabla_{w} \mathcal{L}(w_{\text{old}}),$$`
-
-with learning rate `\(\eta\)`. 
-
-With a loss function evaluated over `\(n\)` training data points (cfr. supra on *epochs* and *minibatches*)
-
-`$$\nabla_w \mathcal{L}(w) = \frac{1}{n} \sum_{i=1}^n \nabla_w \mathcal{L}_i$$`.
-
-]
-
----
-
-# Gradient descent and backpropagation
-
-.pull-left[
-
-In general terms, we want to find (with `\(w\)` for all unknown parameters)
-
-`$$\min_{w} \mathcal{L}(w),$$`
-With gradient descent: we'll move in the direction the loss locally decreases the fastest!
-
-Thus, 
-
-`$$w_{\text{new}} = w_{\text{old}} - \eta \cdot \nabla_{w} \mathcal{L}(w_{\text{old}}),$$`
-
-with learning rate `\(\eta\)`. 
-
-With a loss function evaluated over `\(n\)` training data points (cfr. supra on *epochs* and *minibatches*)
-
-`$$\nabla_w \mathcal{L}(w) = \frac{1}{n} \sum_{i=1}^n \nabla_w \mathcal{L}_i$$`.
-
-]
-
-.pull-right[
-
-Computing the gradient of the loss function wrt all trainable parameters:
-
-* tons of parameters
-* need for efficient algorithm to calculate gradient
-* need for generic algorithm usable for arbitrary number of layers and neurons in each layer.
-
-The strategy (Rumelhart et al., 1986, Nature)
-
-* [backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
-* derivatives in outer layer L are easy 
-* derivatives in layer `\(l\)` as a function of derivatives in layer `\(l+1\)`
-* all about the .KULbginline[chain rule] for derivatives!
-
-
-
-]
-
-
----
-
-# Performance metrics
-
-.pull-left[
-
-```r
-model &lt;- model %&gt;%
-  compile(loss = "categorical_crossentropy", 
-          optimize = optimizer_rmsprop(), 
-*         metrics = c('accuracy'))
-```
-
-
-In additition to the loss function, other .KULbginline[performance measures (metrics)] can be tracked while calibrating the model.
-
-* `accuracy` (= categorical_accuracy)
-* `binary_accuracy`
-* `categorical_accuracy`
-* `sparse_categorical_accuracy`
-* `top_k_categorical_accuracy`
-* `sparse_top_k_categorical_accuracy`
-* `cosine_proximity`
-* any loss function
-]
-
-.pull-right[
-&lt;img src="img/neural_network_metrics.png" width="400" height="400" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-name: yourturn
-class: clear
-
-.left-column[
-
-&lt;!-- Add icon library --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
-
-## &lt;i class="fa fa-edit"&gt;&lt;/i&gt; &lt;br&gt; Your turn
-
-]
-
-
-.right-column[
-As discussed, any .KULbginline[loss function] can be also used as an accuracy .KULbginline[metric].
-
-
-In the case of the MNIST dataset, we search for a model with a high .KULbginline[accuracy]. Hereto, we calculate the number of times the class of the observed `\(y\)` equals the predicted class `\(\hat{y}\)`, and divide by the size of the (training) set.
-
-.hi-pink[Q]: Why can we not use .KULbginline[accuracy] as our loss function?
-]
-
----
-
-# Fitting the model
-
-`fit(.)` tunes the model parameters (the weights and bias terms). 
-
-We use `fit()` to start executing model training.
-
-.pull-left[
-
-
-```r
-model %&gt;%
-* fit(input,
-*     output,
-      batch_size = 128, 
-      epochs = 10, 
-      validation_split = 0.2)
-```
-
-]
-
-.pull-right[
-The first arguments are the input data (here: training images stored in `input`) and their corresponding class (here: 0-9, the labels of the training data, stored in `output`).
-]
-
-
----
-# Fitting the model (cont.)
-
-`fit(.)` tunes the model parameters (the weights and bias terms). 
-
-We use `fit()` to start executing model training.
-
-.pull-left[
-
-
-```r
-model %&gt;%
-  fit(input, 
-      output, 
-*     batch_size = 128,
-*     epochs = 10,
-      validation_split = 0.2)
-```
-
-Parameter updates are calculated based on small subsets of the training data with `batch_size` elements. 
-
-An `epoch` is one iteration of the algorithm over the full dataset. 
-
-]
-
-.pull-right[
-  &lt;img src="img/neural_network_epoch.gif" width="400" height="300" style="display: block; margin: auto;" /&gt;
-.right[Source: [Bradley Boehmke](https://github.com/rstudio-conf-2020/dl-keras-tf)]
 ]
 
 ---
@@ -1882,7 +1761,7 @@ With .KULbginline[early stopping]:
 * stop when this no longer improves.
 
 With .KULbginline[regularization] *(cfr. lasso and {glmnet})*: e.g.
-`$$\min_{w,b} \mathcal{L}(w,b)+\frac{\lambda}{2}\cdot \|w\|_2^2.$$`
+`$$\min_{w,b} \mathcal{L}_{w,b}(.,.)+\frac{\lambda}{2}\cdot \|w\|_2^2.$$`
 
 With .KULbginline[dropout]:
 * randomly set activations to zero, with fixed probability `\(p\)`
@@ -1908,6 +1787,7 @@ model %&gt;%
 ```r
 prediction &lt;- model %&gt;% 
   predict(test_input)
+## 313/313 - 0s - 248ms/epoch - 792us/step
 
 round(prediction[1, ], 3)
 ##  [1] 0.000 0.000 0.001 0.003 0.000 0.000 0.000 0.995 0.000 0.001
@@ -2004,13 +1884,14 @@ random &lt;- matrix(runif(28^2), nrow = 1)
 plot_image(random[1, ])
 ```
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-81-1.png" width="360" height="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-78-1.png" width="360" height="360" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
 
 ```r
 round(predict(model, random), 3)
+## 1/1 - 0s - 15ms/epoch - 15ms/step
 ##      [,1] [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10]
 ## [1,]    0    0 0.617 0.124 0.002 0.196 0.042 0.001 0.018     0
 ```
@@ -2275,7 +2156,7 @@ glm_freq_intercept &lt;- glm(nclaims ~ 1,
 # GLM coefficients
 glm_freq_intercept$coefficients
 ## (Intercept) 
-##   -2.084486
+##   -2.091133
 
 ## NN weights
 nn_freq_intercept$get_weights()
@@ -2358,13 +2239,14 @@ glm_binary &lt;- glm((nclaims &gt; 0) ~ 1,
 
 glm_binary$coefficients
 ## (Intercept) 
-##   -2.064613
+##   -2.073876
 nn_binary$get_weights()[[1]] %&gt;% as.numeric()
 ## [1] -2.063514
 
 unique(predict(glm_binary, type = 'response'))
-## [1] 0.1125841
+## [1] 0.111662
 unique(predict(nn_binary, x = intercept))
+## 3826/3826 - 2s - 2s/epoch - 586us/step
 ##          [,1]
 ## [1,] 0.112694
 ```
@@ -2396,7 +2278,7 @@ glm_offset &lt;- glm(nclaims ~ ageph,
                   offset = log(expo))
 glm_offset$coefficients
 ## (Intercept)       ageph 
-## -1.24456257 -0.01582612
+## -1.22357710 -0.01644835
 
 glm_weights &lt;- glm(nclaims / expo ~ ageph,
                    family = poisson(link = 'log'),
@@ -2404,7 +2286,7 @@ glm_weights &lt;- glm(nclaims / expo ~ ageph,
                    weights = expo)
 glm_weights$coefficients
 ## (Intercept)       ageph 
-## -1.24456257 -0.01582612
+## -1.22357710 -0.01644835
 ```
 ]
 
@@ -2529,11 +2411,17 @@ gam_ageph &lt;- gam(nclaims ~ s(ageph),
 ]
 
 .pull-right[
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-107-1.png" style="display: block; margin: auto;" /&gt;
+
+```
+## 3/3 - 0s - 50ms/epoch - 17ms/step
+```
+
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-104-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
 ---
+
 # Adding a skip connection in a neural network
 
 So far, we stayed in a .hi-pink[purely sequential] architecture with `keras_model_sequential()`.
@@ -2557,6 +2445,7 @@ So, what can we do with this?
 ]
 
 ---
+
 # Adding a skip connection in a neural network (cont.)
 
 Let's take a .KULbginline[claim frequency] example with the `exponential` activation function.
@@ -2573,6 +2462,7 @@ Let's take a .KULbginline[claim frequency] example with the `exponential` activa
 A skip connection allows us to guide the neural net in the right direction and to model .hi.pink[adjustments] on top of the base predictions, for example obtained via a GLM or GAM. In the actuarial lingo this is called a .KULbginline[C]ombined .KULbginline[A]ctuarial .KULbginline[N]eural .KULbginline[N]etwork (.hi-pink[CANN]).
 
 ---
+
 # Adding a skip connection in a neural network (cont.)
 
 Structure of the CANN model we are going to implement
@@ -2580,17 +2470,25 @@ Structure of the CANN model we are going to implement
 &lt;img src="img/structure_cann.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
+
 # Adding a skip connection in a neural network (cont.)
 
-Construct the first neural network for the input covariate `age`. Apply no activation function in the final layer (= linear activation function). The exponential activation function will be applied later after adding the value from the skip connection.
+Construct the first neural network for the input covariate `age`. 
+
+Apply no activation function in the final layer (= linear activation function). 
+
+The exponential activation function will be applied later after adding the value from the skip connection.
+
 
 ```r
 input_nn &lt;- layer_input(shape = c(1), name = 'nn')
 
 output_nn &lt;- input_nn %&gt;% 
   layer_dense(units = 5, activation = 'tanh') %&gt;%
-  layer_dense(units = 1, activation = `NULL`)
+* layer_dense(units = 1, activation = NULL)
 ```
+
+
 
 Create an input for the skip connection.
 
@@ -2598,22 +2496,30 @@ Create an input for the skip connection.
 input_skip &lt;- layer_input(shape = c(1), name = 'skip')
 ```
 
+
+
 ---
+
 # Adding a skip connection in a neural network (cont.)
 
 .hi-pink[Combine] the neural network and skip connection via `layer_add` and pass through the `exponential` function with fixed weights (bias zero, weights 1):
+
 
 ```r
 output &lt;- list(output_nn, input_skip) %&gt;% 
   layer_add() %&gt;% 
   layer_dense(units = 1, 
               activation = 'exponential',
-              `trainable = FALSE`, 
+*             trainable = FALSE,
               name = 'output',
-              weights = list(array(`1`, dim = c(1,1)), array(`0`, dim = c(1))))
+*             weights = list(array(1, dim = c(1,1)), array(0, dim = c(1))))
 ```
 
+
+
+
 Define the full model with .hi-pink[inputs] and .hi-pink[output] via `keras_model` and .hi-pink[compile] as usual:
+
 
 ```r
 cann &lt;- keras_model(inputs = list(input_nn, input_skip), outputs = output)
@@ -2621,12 +2527,15 @@ cann %&gt;% compile(loss = 'poisson', optimize = optimizer_rmsprop())
 ```
 
 ---
+
 # Adding a skip connection in a neural network (cont.)
 
 .pull-left[
 
-<div id="htmlwidget-76c7b0e4dfca990a73d9" style="width:504px;height:504px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-76c7b0e4dfca990a73d9">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"nn\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,5!\"] \n  \"2\" [label = \"dense\nDense\ntanh\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,4!\"] \n  \"3\" [label = \"dense_1\nDense\nlinear\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0,3!\"] \n  \"4\" [label = \"skip\nInputLayer\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"1.5,5!\"] \n  \"5\" [label = \"add\nAdd\n\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,2!\"] \n  \"6\" [label = \"output\nDense\nexponential\", shape = \"rectangle\", fixedsize = \"FALSE\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\", pos = \"0.75,1!\"] \n  \"1\"->\"2\" \n  \"2\"->\"3\" \n  \"3\"->\"5\" \n  \"4\"->\"5\" \n  \"5\"->\"6\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;img src="img/CANN_skip_deepviz.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+
 ]
 
 .pull-right[
@@ -2658,18 +2567,30 @@ cann %&gt;% fit(x = cann_input,
 
 
 ---
+
 # Adding a skip connection in a neural network (cont.)
 
 .pull-left[
+
+```
+## 3/3 - 0s - 52ms/epoch - 17ms/step
+```
+
 &lt;img src="ML_part3_files/figure-html/unnamed-chunk-119-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .pull-right[
+
+```
+## 3/3 - 0s - 21ms/epoch - 7ms/step
+```
+
 &lt;img src="ML_part3_files/figure-html/unnamed-chunk-120-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
+
 # Claim severity modeling with neural nets
 
 Within the GLM framework, .KULbginline[claim severity] is often modeled via a .KULbginline[lognormal] or .KULbginline[gamma] distribution.
@@ -2698,7 +2619,8 @@ nn_sev_log %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_log, 1) %&gt;% exp() %&gt;% as.numeric()
-## [1] 451.4198
+## 1/1 - 0s - 38ms/epoch - 38ms/step
+## [1] 457.8083
 ```
 ]
 
@@ -2707,9 +2629,9 @@ Calculate the .hi-pink[empirical] mean and median severity:
 
 ```r
 claims$avg %&gt;% mean()
-## [1] 1605.764
+## [1] 1689.269
 claims$avg %&gt;% median()
-## [1] 523.452
+## [1] 542.924
 ```
 
 
@@ -2748,7 +2670,7 @@ Note that we use an `exponential` activation to stay in line with a gamma GLM wi
 ```r
 claims %&gt;% dplyr::filter(avg &lt; 300000) %&gt;% 
   dplyr::pull(avg) %&gt;% mean()
-## [1] 1385.939
+## [1] 1460.887
 ```
 
 ]
@@ -2777,7 +2699,8 @@ nn_sev_gamma %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_gamma, 1) %&gt;% as.numeric()
-## [1] 1446.958
+## 1/1 - 0s - 49ms/epoch - 49ms/step
+## [1] 1524.465
 ```
 
 ]
@@ -3110,6 +3033,7 @@ Which images are misclassified?
 
 ```r
 prediction &lt;- model %&gt;% predict(input_test)
+## 313/313 - 1s - 558ms/epoch - 2ms/step
 category &lt;- apply(prediction, 1, which.max) - 1
 actual_category &lt;- apply(output_test, 1, which.max) - 1
 head(which(actual_category != category))
@@ -3563,7 +3487,7 @@ nn_case %&gt;%
            y = test_y,
            verbose = 0)
 ##      loss 
-## 0.3741113
+## 0.3786413
 
 # If you want to check the results
 poisson_loss &lt;- function(pred, actual) {
@@ -3571,7 +3495,8 @@ poisson_loss &lt;- function(pred, actual) {
 }
 poisson_loss(predict(nn_case, test_x),
              test_y)
-## [1] 0.3741113
+## 1276/1276 - 1s - 787ms/epoch - 617us/step
+## [1] 0.3786418
 
 # Use array for weights in evaluate
 nn_case %&gt;% 
@@ -3580,7 +3505,7 @@ nn_case %&gt;%
            sample_weight = array(test_expo),
            verbose = 0)
 ##      loss 
-## 0.3413752
+## 0.3456186
 ```
 
 ]
@@ -3600,7 +3525,7 @@ gam_case &lt;- gam(
 poisson_loss(predict(gam_case, mtpl_test,
                      type = 'response'),
              test_y)
-## [1] 0.3746941
+## [1] 0.3794901
 ```
 
 
@@ -3621,7 +3546,8 @@ Slides created with the R package [xaringan](https://github.com/yihui/xaringan).
 &lt;br&gt; &lt;br&gt; &lt;br&gt;
 Course material available via 
 &lt;br&gt;
-&lt;svg style="height:0.8em;top:.04em;position:relative;fill:#116E8A;" viewBox="0 0 496 512"&gt;&lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/&gt;&lt;/svg&gt; https://github.com/katrienantonio/hands-on-machine-learning-R-module-3
+<svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#116E8A;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> https://github.com/katrienantonio/hands-on-machine-learning-R-module-3
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -3671,6 +3597,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
