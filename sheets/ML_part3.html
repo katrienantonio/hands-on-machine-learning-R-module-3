@@ -1787,7 +1787,7 @@ model %&gt;%
 ```r
 prediction &lt;- model %&gt;% 
   predict(test_input)
-## 313/313 - 0s - 248ms/epoch - 792us/step
+## 313/313 - 0s - 264ms/epoch - 843us/step
 
 round(prediction[1, ], 3)
 ##  [1] 0.000 0.000 0.001 0.003 0.000 0.000 0.000 0.995 0.000 0.001
@@ -1891,7 +1891,7 @@ plot_image(random[1, ])
 
 ```r
 round(predict(model, random), 3)
-## 1/1 - 0s - 15ms/epoch - 15ms/step
+## 1/1 - 0s - 19ms/epoch - 19ms/step
 ##      [,1] [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10]
 ## [1,]    0    0 0.617 0.124 0.002 0.196 0.042 0.001 0.018     0
 ```
@@ -2017,7 +2017,7 @@ Formula |  GLM  | Neural network
 &amp;nbsp; Poisson &amp;nbsp; | &amp;nbsp; distribution &amp;nbsp; | loss function
 exp            | inverse link function | &amp;nbsp; activation function &amp;nbsp;
 `\(\color{#e64173}{x}\)`  | predictors | input nodes
-`\(\color{#20B2AA}{\beta}\)` | fitted effect | weights
+`\(\color{#20B2AA}{\beta}\)` | regression parameters | weights
 ]
 
 ---
@@ -2246,7 +2246,7 @@ nn_binary$get_weights()[[1]] %&gt;% as.numeric()
 unique(predict(glm_binary, type = 'response'))
 ## [1] 0.111662
 unique(predict(nn_binary, x = intercept))
-## 3826/3826 - 2s - 2s/epoch - 586us/step
+## 3826/3826 - 3s - 3s/epoch - 704us/step
 ##          [,1]
 ## [1,] 0.112694
 ```
@@ -2258,10 +2258,10 @@ unique(predict(nn_binary, x = intercept))
 .pull-left[
 The .KULbginline[Poisson loss] function, including .hi-pink[exposure], is
 
-$$ \mathcal{L} = \sum_i \texttt{expo}_i \cdot \lambda_i - y_i \cdot \log(\texttt{expo}_i \cdot \lambda_i),$$
-which is proportional to:
+$$ \mathcal{L}(y, \hat{y}) = \sum_i \texttt{expo}_i \cdot \lambda_i - y_i \cdot \log(\texttt{expo}_i \cdot \lambda_i),$$
+where `\(\hat{y}_i = \text{expo}_i \cdot \lambda_i\)` which is proportional to:
 
-$$ \mathcal{L} = \sum_i \texttt{expo}_i \cdot (\lambda_i - \frac{y_i}{\texttt{expo}_i} \log(\lambda_i)).$$
+$$ \mathcal{L}(y,\hat{y}) = \sum_i \texttt{expo}_i \cdot (\lambda_i - \frac{y_i}{\texttt{expo}_i} \log(\lambda_i)).$$
 This is the loss function for a Poisson model with:
 
 * observations `\(\frac{y_i}{\texttt{expo}_i}\)` and
@@ -2413,7 +2413,7 @@ gam_ageph &lt;- gam(nclaims ~ s(ageph),
 .pull-right[
 
 ```
-## 3/3 - 0s - 50ms/epoch - 17ms/step
+## 3/3 - 0s - 115ms/epoch - 38ms/step
 ```
 
 &lt;img src="ML_part3_files/figure-html/unnamed-chunk-104-1.png" style="display: block; margin: auto;" /&gt;
@@ -2573,7 +2573,7 @@ cann %&gt;% fit(x = cann_input,
 .pull-left[
 
 ```
-## 3/3 - 0s - 52ms/epoch - 17ms/step
+## 3/3 - 0s - 51ms/epoch - 17ms/step
 ```
 
 &lt;img src="ML_part3_files/figure-html/unnamed-chunk-119-1.png" style="display: block; margin: auto;" /&gt;
@@ -2583,7 +2583,7 @@ cann %&gt;% fit(x = cann_input,
 .pull-right[
 
 ```
-## 3/3 - 0s - 21ms/epoch - 7ms/step
+## 3/3 - 0s - 44ms/epoch - 15ms/step
 ```
 
 &lt;img src="ML_part3_files/figure-html/unnamed-chunk-120-1.png" style="display: block; margin: auto;" /&gt;
@@ -2593,9 +2593,8 @@ cann %&gt;% fit(x = cann_input,
 
 # Claim severity modeling with neural nets
 
-Within the GLM framework, .KULbginline[claim severity] is often modeled via a .KULbginline[lognormal] or .KULbginline[gamma] distribution.
-
 .pull-left[
+
 Filter the .hi-pink[claims] data:
 
 ```r
@@ -2619,8 +2618,8 @@ nn_sev_log %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_log, 1) %&gt;% exp() %&gt;% as.numeric()
-## 1/1 - 0s - 38ms/epoch - 38ms/step
-## [1] 457.8083
+## 1/1 - 0s - 29ms/epoch - 29ms/step
+## [1] 456.2719
 ```
 ]
 
@@ -2661,7 +2660,7 @@ We are doing the latter, but how to .hi-pink[estimate] `\(\sigma\)` in a neural 
 
 The .hi-pink[gamma deviance] for observation `\(i\)` is defined as:
 
-`$$\frac{y_i - f(x_i)}{f(x_i)} - \ln \left( \frac{y_i}{f(x_i)} \right).$$`
+`$$\frac{y_i - \hat{y}_i}{\hat{y}_i} - \ln \left( \frac{y_i}{\hat{y}_i} \right).$$`
 Keras takes care of averaging over observations internally.
 
 Note that we use an `exponential` activation to stay in line with a gamma GLM with .hi-pink[log-link] function.
@@ -2687,8 +2686,8 @@ k_gamma &lt;- function(y_true, y_pred) {
 ```r
 nn_sev_gamma &lt;- keras_model_sequential() %&gt;%
   layer_dense(units = 1,
-*             activation = 'exponential',
-              input_shape = c(1), use_bias = FALSE) %&gt;%
+*       activation = 'exponential',
+        input_shape = c(1), use_bias = FALSE) %&gt;%
 * compile(loss = k_gamma,
           optimize = optimizer_rmsprop())
 
@@ -2699,13 +2698,124 @@ nn_sev_gamma %&gt;%
       validation_split = 0, verbose = 0)
 
 predict(nn_sev_gamma, 1) %&gt;% as.numeric()
-## 1/1 - 0s - 49ms/epoch - 49ms/step
-## [1] 1524.465
+## 1/1 - 0s - 29ms/epoch - 29ms/step
+## [1] 1471.757
 ```
 
 ]
 
 ---
+
+# Background reading
+
+.left-column[
+
+&lt;br&gt;
+
+&lt;img src = "img/naaj.png" height = "350px" /&gt;
+
+]
+
+.right-column[
+
+In module 2 we mentioned the Henckaerts et al. (2021) paper on [Boosting insights in insurance tariff plans with tree-based machine learning methods](https://katrienantonio.github.io/project/tree-based-insurance-pricing/).
+
+We extended this paper to deep learning structures in Holvoet et al. (2023, arxiv) on [Neural networks for insurance pricing with frequency and severity data: a benchmark study from data preprocessing to technical tariff](https://arxiv.org/abs/2310.12671): 
+
+- full algorithmic details and tuning strategy for ANNs, CANNs (fixed weights and trainable weights), with focus on claim frequency and severity modelling
+- comparison of embedding strategies for categorical (or: factor) covariates: auto-encoders and one-hot encoding
+- model comparison (GLMs, GAMs, trees, RFs, GBMs, ANNs, CANNs) 
+- interpretation and managerial tools (e.g., loss ratio, discrimination power)
+- construction of GLM as a globale surrogate model for a (more complex) deep learning model. 
+
+The paper comes with reproducible examples in [https://github.com/freekholvoet/nnforfreqsevpricing](https://github.com/freekholvoet/nnforfreqsevpricing).
+
+
+]
+
+---
+
+# Contributions to the literature
+
+.center[
+&lt;img src="./img/literature_overview.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Data sets in the Holvoet et al. (2023) study
+
+.center[
+&lt;img src="./img/data_sets_NN.png" width="80%" height="60%" style="display: block; margin: auto;" /&gt;
+]
+
+
+
+---
+
+# Background reading: Holvoet et al. (2023, arxiv)
+
+.left-column[
+
+
+&lt;br&gt;
+
+&lt;img src = "img/randomgrid_example.png" width = "800px" /&gt;
+
+]
+
+.right-column[
+
+We use random grid search as tuning strategy (Bergstra and Bengio, 2012):
+
+* for each tuning parameter `\(t_k\)` we define a range `\([t_{k,\text{min}}, t_{k,\text{max}}]\)`
+
+* the search space `\(\mathcal{S}\)` is defined as 
+  `\(\mathcal{S} = \left[t_{1,\text{min}},t_{1,\text{max}}\right] \times\ldots\times\left[t_{K,\text{min}},t_{K,\text{max}}\right]\)`
+  
+* we draw a random grid `\(\mathcal{R}\subset\mathcal{S}\)` of candidate tuning parameters.
+
+]
+
+---
+
+# Background reading: Holvoet et al. (2023, arxiv)
+
+For both the ANNs and CANNs, a random grid `\(\mathcal{R}\)` of size 40 is sampled from the
+search space `\(\mathcal{S}\)` defined by the tuning parameters and their respective ranges as shown below:
+
+&lt;img src="img/tuning_holvoet_paper.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Out-of-sample evaluation in Holvoet et al. (2023, arxiv)
+
+
+.center[
+&lt;img src="./img/pred_comp_NN.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+]
+
+Out-of-sample performance comparison between the different models for the Australian and Belgian data sets. The LHS shows the performance of the frequency models and the RHS for
+the severity models. 
+
+.center[
+&lt;img src="./img/legend_CANN.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Out-of-sample evaluation (cont'd)
+
+.center[
+&lt;img src="./img/pred_comp_NN_2.png" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+]
+
+
+Out-of-sample performance comparison between the different models for the French and Norwegian data sets. The LHS shows the performance of the frequency models and the RHS for
+the severity models. 
+
+---
+
 
 class: inverse, center, middle
 name: cnn
@@ -2818,7 +2928,7 @@ A useful feature for classifying the number four is the presence of straight, .h
 
 .hi-pink[Q]: How should the .hi-pink[kernel] look to detect this feature?
   
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-134-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-140-1.png" width="200" height="200" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -3033,7 +3143,7 @@ Which images are misclassified?
 
 ```r
 prediction &lt;- model %&gt;% predict(input_test)
-## 313/313 - 1s - 558ms/epoch - 2ms/step
+## 313/313 - 1s - 719ms/epoch - 2ms/step
 category &lt;- apply(prediction, 1, which.max) - 1
 actual_category &lt;- apply(output_test, 1, which.max) - 1
 head(which(actual_category != category))
@@ -3048,7 +3158,7 @@ cbind(category, actual_category)[93,]
 ##        category actual_category 
 ##               4               9
 ```
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-152-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-158-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -3064,7 +3174,7 @@ str(filters)
 
 .hi-pink[Q:] can you find an interpretation for each of these filters?
 
-&lt;img src="ML_part3_files/figure-html/unnamed-chunk-154-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="ML_part3_files/figure-html/unnamed-chunk-160-1.png" width="30%" style="display: block; margin: auto;" /&gt;
 
 ---
 name: yourturn
@@ -3495,7 +3605,7 @@ poisson_loss &lt;- function(pred, actual) {
 }
 poisson_loss(predict(nn_case, test_x),
              test_y)
-## 1276/1276 - 1s - 787ms/epoch - 617us/step
+## 1276/1276 - 1s - 1s/epoch - 820us/step
 ## [1] 0.3786418
 
 # Use array for weights in evaluate
@@ -3531,6 +3641,17 @@ poisson_loss(predict(gam_case, mtpl_test,
 
 ]
 
+---
+
+# Background reading
+
+In the Holvoet et al. (2023, arxiv) paper we explore the use of autoencoders as an embedding for categorical (or: factor) variables. 
+
+We also compare the performance of autoencoder embedding and one-hot encoding. 
+
+.center[
+&lt;img src="./img/Autoencoder.png" width="80%" height="40%" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 name: wrap-up
